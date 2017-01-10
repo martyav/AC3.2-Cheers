@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Cheers View Controller-->
+        <!--CHEERS-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="CheersViewController" customModule="AC3_2_Cheers" customModuleProvider="target" sceneMemberID="viewController">
@@ -28,6 +28,7 @@
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a5o-Ju-Y0W">
                                 <rect key="frame" x="330" y="64" width="45" height="43"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="nMM-f0-sgi"/>
                                     <constraint firstAttribute="height" constant="43" id="zvW-mW-TEA"/>
@@ -70,7 +71,7 @@
                             <constraint firstAttribute="trailing" secondItem="qhl-LX-ShA" secondAttribute="trailing" id="wxf-eD-ts9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="3nn-ai-Hrk"/>
+                    <navigationItem key="navigationItem" title="CHEERS" id="3nn-ai-Hrk"/>
                     <connections>
                         <outlet property="mapView" destination="nTk-cG-djD" id="h2q-mx-E7B"/>
                         <outlet property="tableView" destination="qhl-LX-ShA" id="XVz-dU-85P"/>
@@ -98,14 +99,21 @@
             </objects>
             <point key="canvasLocation" x="1858" y="797"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--CHEERS-->
         <scene sceneID="Fqa-BJ-ILR">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fgl-MU-naa" sceneMemberID="viewController">
+                <navigationController title="CHEERS" automaticallyAdjustsScrollViewInsets="NO" id="fgl-MU-naa" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uzn-ht-f99">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Uzn-ht-f99">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.99215686270000003" green="0.74901960779999999" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="VivaLaFiesta" family="Viva La Fiesta" pointSize="46"/>
+                            <color key="textColor" red="0.93333333333333335" green="0.54117647058823526" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
