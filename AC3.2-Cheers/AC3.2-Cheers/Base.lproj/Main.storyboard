@@ -34,32 +34,36 @@
                                     <segue destination="idk-Bt-hiu" kind="show" id="IKR-QD-0Z2"/>
                                 </connections>
                             </button>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="DXC-a6-pBA">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kZp-KY-45g">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="274" id="6yJ-TC-fsH"/>
+                                    <constraint firstAttribute="height" constant="272" id="ae9-SU-NH3"/>
                                 </constraints>
                             </mapView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="alU-dH-9m3">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UiH-Av-g3d">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="UiH-Av-g3d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="0Qk-Z3-kgl"/>
                             <constraint firstItem="5UO-Rn-giR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="3oH-AX-lK3"/>
                             <constraint firstItem="a5o-Ju-Y0W" firstAttribute="leading" secondItem="5UO-Rn-giR" secondAttribute="trailing" id="5hm-3e-DUX"/>
-                            <constraint firstAttribute="trailing" secondItem="DXC-a6-pBA" secondAttribute="trailing" id="7lm-i8-O4R"/>
-                            <constraint firstItem="DXC-a6-pBA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="99F-a5-P4F"/>
                             <constraint firstItem="a5o-Ju-Y0W" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="GiB-UY-L2b"/>
-                            <constraint firstItem="DXC-a6-pBA" firstAttribute="top" secondItem="5UO-Rn-giR" secondAttribute="bottom" id="Hjs-RP-ga8"/>
-                            <constraint firstItem="alU-dH-9m3" firstAttribute="top" secondItem="DXC-a6-pBA" secondAttribute="bottom" id="Wg4-Ef-ley"/>
-                            <constraint firstAttribute="trailing" secondItem="alU-dH-9m3" secondAttribute="trailing" id="Ykh-gd-179"/>
+                            <constraint firstAttribute="trailing" secondItem="kZp-KY-45g" secondAttribute="trailing" id="e8V-DI-stE"/>
                             <constraint firstAttribute="trailing" secondItem="a5o-Ju-Y0W" secondAttribute="trailing" id="kwe-iG-M9Z"/>
                             <constraint firstItem="5UO-Rn-giR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="l2v-SH-Ncr"/>
-                            <constraint firstItem="alU-dH-9m3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="tz4-iA-WaW"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="alU-dH-9m3" secondAttribute="bottom" id="xRl-go-wwL"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="UiH-Av-g3d" secondAttribute="bottom" id="v6U-Kf-J8k"/>
+                            <constraint firstItem="kZp-KY-45g" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="vfd-Fo-oEq"/>
+                            <constraint firstItem="kZp-KY-45g" firstAttribute="top" secondItem="5UO-Rn-giR" secondAttribute="bottom" id="wan-cd-Q4f"/>
+                            <constraint firstAttribute="trailing" secondItem="UiH-Av-g3d" secondAttribute="trailing" id="xDm-Qn-O3o"/>
+                            <constraint firstItem="UiH-Av-g3d" firstAttribute="top" secondItem="kZp-KY-45g" secondAttribute="bottom" id="xxN-Fw-yaf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3nn-ai-Hrk"/>
+                    <connections>
+                        <outlet property="mapView" destination="kZp-KY-45g" id="7BZ-ok-1G8"/>
+                        <outlet property="tableView" destination="UiH-Av-g3d" id="MwR-Dg-Sn7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

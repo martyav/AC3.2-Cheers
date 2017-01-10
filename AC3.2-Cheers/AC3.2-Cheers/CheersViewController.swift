@@ -10,7 +10,10 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var tableView: UITableView!
     
     let locationManager: CLLocationManager = {
         let location: CLLocationManager = CLLocationManager()
@@ -33,13 +36,23 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     // MARK: - Mapview Delegate
 
-    // MARK: - MapView
+    // MARK: - TableView Delegate & Data Source
     
-    internal lazy var mapView: MKMapView = {
-        let mapView: MKMapView = MKMapView()
-        return mapView
-    }()
-
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cheers", for: indexPath)
+        return cell
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 
