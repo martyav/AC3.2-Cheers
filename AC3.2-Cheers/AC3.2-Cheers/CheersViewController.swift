@@ -40,7 +40,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         tableView.delegate = self
         tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
-        getData()
+        //getData()
         initializeFetchedResultsController()
         
         
@@ -87,6 +87,23 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     // MARK: - CoreLocation Delegate
     
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
+            print("Authorized, start tracking!")
+            manager.startUpdatingLocation()
+        case .denied, .restricted:
+            print("Denied or restricted, change in settings!")
+        default:
+            self.locationManager.requestAlwaysAuthorization()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("getting location!")
+        dump(locations)
+    }
+    
     // MARK: - Mapview Delegate
     
     // MARK: - TableView Delegate & Data Source
@@ -110,11 +127,11 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "cheers", for: indexPath) as!BasicCheersTableViewCell
         let venueObj = fetchedResultsController.object(at: indexPath)
         cell.venueName.text = venueObj.name
-        cell.distance.text = String(venueObj.distance)
-        let price = String(repeatElement("$", count: Int(venueObj.tier)))
-        cell.pricing.text = price
-        cell.favorite.backgroundColor = .white
-        cell.popularTimes.text = "  "
+//        cell.distance.text = String(venueObj.distance)
+//        let price = String(repeatElement("$", count: Int(venueObj.tier)))
+//        cell.pricing.text = price
+//        //cell.favorite.backgroundColor = .white
+//        cell.popularTimes.text = "  "
         return cell
     }
     // MARK - FetchResultsController Functions
