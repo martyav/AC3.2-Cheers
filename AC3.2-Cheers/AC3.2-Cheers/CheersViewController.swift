@@ -110,7 +110,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let annotation: MKPointAnnotation = MKPointAnnotation()
         annotation.coordinate = validLocation.coordinate
         annotation.title = "This is you!"
-        annotation.subtitle = "\(validLocation)"
+//        annotation.subtitle = "\(validLocation)"
         mapView.addAnnotation(annotation)
         
         let cirlceOverLay: MKCircle = MKCircle(center: annotation.coordinate, radius: 100.0)
