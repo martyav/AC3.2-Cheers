@@ -12,6 +12,7 @@ extension HappyHourVenue {
     func populate(from dict: [String: Any]) {
         //guard let venueDict = dict["venue"] as? [String: Any]  else {return}
         if let name = dict["name"] as? String,
+            let id = dict["id"] as? String,
             let contact = dict["contact"] as? [String:Any],
             let phoneNumb = contact["formattedPhone"] as? String,
             let locationDict = dict["location"] as? [String: Any],
@@ -24,6 +25,7 @@ extension HappyHourVenue {
             let status = hoursDict["status"] as? String {
 
             self.name = name
+            self.id = id
             self.phoneNumber = phoneNumb
             for address in addressArray {
                 self.address = " " + address
