@@ -1,19 +1,91 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="BasicCheersTableViewCell" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="KGk-i7-Jjw" customClass="BasicCheersTableViewCell" customModule="AC3_2_Cheers" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFu-FG-B9S">
+                        <rect key="frame" x="8" y="0.0" width="241" height="28"/>
+                        <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yh7-PG-LQf">
+                        <rect key="frame" x="8" y="44" width="241" height="28"/>
+                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" misplaced="YES" text="distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3s-ER-mhg">
+                        <rect key="frame" x="8" y="71" width="304" height="28"/>
+                        <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="20"/>
+                        <color key="textColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hC9-PG-utf" customClass="FaveButton" customModule="FaveButton">
+                        <rect key="frame" x="257" y="0.0" width="55" height="55"/>
+                        <state key="normal" title="Button" image="heart"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                <color key="value" red="0.98594677450000001" green="0.0" blue="0.039444983009999997" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="dotFirstColor">
+                                <color key="value" red="0.97697269916534424" green="0.74436271190643311" blue="0.75931167602539062" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="dotSecondColor">
+                                <color key="value" red="0.98594677450000001" green="0.0" blue="0.039444983009999997" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="circleFromColor">
+                                <color key="value" red="0.97697269919999996" green="0.74436271190000003" blue="0.75931167600000005" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="circleToColor">
+                                <color key="value" red="0.98594677450000001" green="0.0" blue="0.039444983009999997" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="hC9-PG-utf" secondAttribute="trailing" constant="8" id="22t-li-a6j"/>
+                    <constraint firstAttribute="trailing" secondItem="M3s-ER-mhg" secondAttribute="trailing" constant="8" id="A1i-WA-6JL"/>
+                    <constraint firstItem="hC9-PG-utf" firstAttribute="leading" secondItem="yh7-PG-LQf" secondAttribute="trailing" constant="8" id="M3l-EN-Maa"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="yh7-PG-LQf" secondAttribute="bottom" constant="19" id="Pzt-Mn-wu1"/>
+                    <constraint firstAttribute="bottom" secondItem="M3s-ER-mhg" secondAttribute="bottom" constant="1" id="TIQ-xa-YcX"/>
+                    <constraint firstItem="OFu-FG-B9S" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="VWS-cP-3ui"/>
+                    <constraint firstItem="M3s-ER-mhg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="XDE-QU-4gq"/>
+                    <constraint firstItem="hC9-PG-utf" firstAttribute="leading" secondItem="OFu-FG-B9S" secondAttribute="trailing" constant="8" id="aPq-bA-eCg"/>
+                    <constraint firstItem="M3s-ER-mhg" firstAttribute="top" secondItem="hC9-PG-utf" secondAttribute="bottom" constant="16" id="dPL-S6-ncO"/>
+                    <constraint firstItem="hC9-PG-utf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="iL3-HG-zuF"/>
+                    <constraint firstItem="M3s-ER-mhg" firstAttribute="top" secondItem="hC9-PG-utf" secondAttribute="bottom" constant="16" id="jXJ-SG-S8P"/>
+                    <constraint firstItem="yh7-PG-LQf" firstAttribute="top" secondItem="OFu-FG-B9S" secondAttribute="bottom" constant="16" id="jii-OY-hJc"/>
+                    <constraint firstItem="OFu-FG-B9S" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="q3Q-BQ-iOz"/>
+                    <constraint firstItem="yh7-PG-LQf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="t9a-x8-DsD"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="distance" destination="M3s-ER-mhg" id="FFC-Q5-v8u"/>
+                <outlet property="favorite" destination="hC9-PG-utf" id="fnP-TE-piB"/>
+                <outlet property="rating" destination="yh7-PG-LQf" id="0M4-l2-fSX"/>
+                <outlet property="venueName" destination="OFu-FG-B9S" id="6Ul-0E-vem"/>
+            </connections>
+            <point key="canvasLocation" x="25" y="80"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="heart" width="128" height="128"/>
+    </resources>
 </document>
