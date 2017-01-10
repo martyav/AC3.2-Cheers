@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC81B495C3157D3600DF5F95 /* Pods_AC3_2_Cheers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014E24C59D16F65B92F43431 /* Pods_AC3_2_Cheers.framework */; };
 		D372221B1E25354B00E6B2D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D372221A1E25354B00E6B2D5 /* AppDelegate.swift */; };
 		D372221D1E25354B00E6B2D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D372221C1E25354B00E6B2D5 /* ViewController.swift */; };
 		D37222201E25354B00E6B2D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D372221E1E25354B00E6B2D5 /* Main.storyboard */; };
@@ -16,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		014E24C59D16F65B92F43431 /* Pods_AC3_2_Cheers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AC3_2_Cheers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C5D2707D79EE03999705F9A /* Pods-AC3.2-Cheers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AC3.2-Cheers.release.xcconfig"; path = "Pods/Target Support Files/Pods-AC3.2-Cheers/Pods-AC3.2-Cheers.release.xcconfig"; sourceTree = "<group>"; };
 		D37222171E25354B00E6B2D5 /* AC3.2-Cheers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AC3.2-Cheers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D372221A1E25354B00E6B2D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D372221C1E25354B00E6B2D5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +27,7 @@
 		D37222241E25354B00E6B2D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D37222271E25354B00E6B2D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D37222291E25354B00E6B2D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E20870E44545D08393164D3B /* Pods-AC3.2-Cheers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AC3.2-Cheers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AC3.2-Cheers/Pods-AC3.2-Cheers.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC81B495C3157D3600DF5F95 /* Pods_AC3_2_Cheers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +47,8 @@
 			children = (
 				D37222191E25354B00E6B2D5 /* AC3.2-Cheers */,
 				D37222181E25354B00E6B2D5 /* Products */,
+				DE149CD1EAA7BF33CB5C0C0A /* Pods */,
+				DC87FCFD62880A32B9F6DF17 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +74,23 @@
 			path = "AC3.2-Cheers";
 			sourceTree = "<group>";
 		};
+		DC87FCFD62880A32B9F6DF17 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				014E24C59D16F65B92F43431 /* Pods_AC3_2_Cheers.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DE149CD1EAA7BF33CB5C0C0A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E20870E44545D08393164D3B /* Pods-AC3.2-Cheers.debug.xcconfig */,
+				7C5D2707D79EE03999705F9A /* Pods-AC3.2-Cheers.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +98,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D372222C1E25354B00E6B2D5 /* Build configuration list for PBXNativeTarget "AC3.2-Cheers" */;
 			buildPhases = (
+				B9DFEC56F62B25F8198D740C /* [CP] Check Pods Manifest.lock */,
 				D37222131E25354B00E6B2D5 /* Sources */,
 				D37222141E25354B00E6B2D5 /* Frameworks */,
 				D37222151E25354B00E6B2D5 /* Resources */,
+				CC292EDFEDEFD20F0E9FCC38 /* [CP] Embed Pods Frameworks */,
+				19DE75988AA424A856A3C5C6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -133,6 +160,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		19DE75988AA424A856A3C5C6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AC3.2-Cheers/Pods-AC3.2-Cheers-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B9DFEC56F62B25F8198D740C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CC292EDFEDEFD20F0E9FCC38 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AC3.2-Cheers/Pods-AC3.2-Cheers-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D37222131E25354B00E6B2D5 /* Sources */ = {
@@ -262,6 +337,7 @@
 		};
 		D372222D1E25354B00E6B2D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E20870E44545D08393164D3B /* Pods-AC3.2-Cheers.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "AC3.2-Cheers/Info.plist";
@@ -274,6 +350,7 @@
 		};
 		D372222E1E25354B00E6B2D5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C5D2707D79EE03999705F9A /* Pods-AC3.2-Cheers.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "AC3.2-Cheers/Info.plist";
