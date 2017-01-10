@@ -16,29 +16,45 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFu-FG-B9S">
-                        <rect key="frame" x="8" y="0.0" width="241" height="28"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFu-FG-B9S">
+                        <rect key="frame" x="8" y="0.0" width="241" height="26"/>
                         <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yh7-PG-LQf">
-                        <rect key="frame" x="8" y="44" width="241" height="28"/>
-                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
-                        <nil key="textColor"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yh7-PG-LQf">
+                        <rect key="frame" x="16" y="44" width="65" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="28" id="1lb-vz-qwI"/>
+                            <constraint firstAttribute="width" constant="65" id="Dzw-iz-xiG"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="20"/>
+                        <color key="textColor" red="0.16253036260000001" green="0.60677415130000001" blue="0.17554734650000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" misplaced="YES" text="distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3s-ER-mhg">
-                        <rect key="frame" x="8" y="71" width="304" height="28"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3s-ER-mhg">
+                        <rect key="frame" x="16" y="65" width="304" height="26.5"/>
                         <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="20"/>
                         <color key="textColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hC9-PG-utf" customClass="FaveButton" customModule="FaveButton">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="poppin' times" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FN5-SW-PBy">
+                        <rect key="frame" x="89" y="44" width="184" height="28"/>
+                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hC9-PG-utf" customClass="FaveButton" customModule="FaveButton">
                         <rect key="frame" x="257" y="0.0" width="55" height="55"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="3Ic-0c-9cW"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="GCE-FD-Ewg"/>
+                            <constraint firstAttribute="width" constant="55" id="QJL-bd-oWs"/>
+                            <constraint firstAttribute="height" constant="55" id="f1v-mb-fO2"/>
+                        </constraints>
                         <state key="normal" title="Button" image="heart"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
@@ -60,26 +76,27 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="hC9-PG-utf" secondAttribute="trailing" constant="8" id="22t-li-a6j"/>
-                    <constraint firstAttribute="trailing" secondItem="M3s-ER-mhg" secondAttribute="trailing" constant="8" id="A1i-WA-6JL"/>
-                    <constraint firstItem="hC9-PG-utf" firstAttribute="leading" secondItem="yh7-PG-LQf" secondAttribute="trailing" constant="8" id="M3l-EN-Maa"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="yh7-PG-LQf" secondAttribute="bottom" constant="19" id="Pzt-Mn-wu1"/>
-                    <constraint firstAttribute="bottom" secondItem="M3s-ER-mhg" secondAttribute="bottom" constant="1" id="TIQ-xa-YcX"/>
-                    <constraint firstItem="OFu-FG-B9S" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="VWS-cP-3ui"/>
-                    <constraint firstItem="M3s-ER-mhg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="XDE-QU-4gq"/>
-                    <constraint firstItem="hC9-PG-utf" firstAttribute="leading" secondItem="OFu-FG-B9S" secondAttribute="trailing" constant="8" id="aPq-bA-eCg"/>
-                    <constraint firstItem="M3s-ER-mhg" firstAttribute="top" secondItem="hC9-PG-utf" secondAttribute="bottom" constant="16" id="dPL-S6-ncO"/>
-                    <constraint firstItem="hC9-PG-utf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="iL3-HG-zuF"/>
-                    <constraint firstItem="M3s-ER-mhg" firstAttribute="top" secondItem="hC9-PG-utf" secondAttribute="bottom" constant="16" id="jXJ-SG-S8P"/>
-                    <constraint firstItem="yh7-PG-LQf" firstAttribute="top" secondItem="OFu-FG-B9S" secondAttribute="bottom" constant="16" id="jii-OY-hJc"/>
-                    <constraint firstItem="OFu-FG-B9S" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="q3Q-BQ-iOz"/>
-                    <constraint firstItem="yh7-PG-LQf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="t9a-x8-DsD"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="FN5-SW-PBy" secondAttribute="trailing" constant="39" id="7Wb-bj-5y0"/>
+                    <constraint firstItem="M3s-ER-mhg" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="8" id="9dV-wE-bgB"/>
+                    <constraint firstItem="OFu-FG-B9S" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="DJh-xO-7Gs"/>
+                    <constraint firstItem="yh7-PG-LQf" firstAttribute="leading" secondItem="M3s-ER-mhg" secondAttribute="leading" id="E2X-8V-pUv"/>
+                    <constraint firstItem="yh7-PG-LQf" firstAttribute="baseline" secondItem="FN5-SW-PBy" secondAttribute="baseline" id="Jzj-QM-dXB"/>
+                    <constraint firstItem="yh7-PG-LQf" firstAttribute="top" secondItem="OFu-FG-B9S" secondAttribute="bottom" constant="18" id="bXM-pi-gFL"/>
+                    <constraint firstItem="M3s-ER-mhg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="faE-Sj-MXo"/>
+                    <constraint firstItem="hC9-PG-utf" firstAttribute="leading" secondItem="OFu-FG-B9S" secondAttribute="trailing" constant="8" id="kcc-al-Raz"/>
+                    <constraint firstAttribute="trailing" secondItem="hC9-PG-utf" secondAttribute="trailing" constant="8" id="koW-YI-uXL"/>
+                    <constraint firstItem="hC9-PG-utf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="lWs-3r-vpB"/>
+                    <constraint firstItem="OFu-FG-B9S" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="mUb-Kn-89A"/>
+                    <constraint firstItem="FN5-SW-PBy" firstAttribute="leading" secondItem="yh7-PG-LQf" secondAttribute="trailing" constant="8" id="rnr-FP-GV1"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="M3s-ER-mhg" secondAttribute="bottom" id="uiZ-PC-MbR"/>
+                    <constraint firstItem="FN5-SW-PBy" firstAttribute="top" secondItem="OFu-FG-B9S" secondAttribute="bottom" constant="18" id="v7L-lK-IgA"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="distance" destination="M3s-ER-mhg" id="FFC-Q5-v8u"/>
                 <outlet property="favorite" destination="hC9-PG-utf" id="fnP-TE-piB"/>
-                <outlet property="rating" destination="yh7-PG-LQf" id="0M4-l2-fSX"/>
+                <outlet property="popularTimes" destination="FN5-SW-PBy" id="Se7-Gj-fNi"/>
+                <outlet property="pricing" destination="yh7-PG-LQf" id="03W-7w-Ocw"/>
                 <outlet property="venueName" destination="OFu-FG-B9S" id="6Ul-0E-vem"/>
             </connections>
             <point key="canvasLocation" x="25" y="80"/>
