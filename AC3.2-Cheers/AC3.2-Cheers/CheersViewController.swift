@@ -34,6 +34,23 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     // MARK: - CoreLocation Delegate
     
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
+            print("Authorized, start tracking!")
+            manager.startUpdatingLocation()
+        case .denied, .restricted:
+            print("Denied or restricted, change in settings!")
+        default:
+            self.locationManager.requestAlwaysAuthorization()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("getting location!")
+        dump(locations)
+    }
+    
     // MARK: - Mapview Delegate
 
     // MARK: - TableView Delegate & Data Source

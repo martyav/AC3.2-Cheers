@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9C6097321E25478D00A54979 /* CheersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6097311E25478D00A54979 /* CheersViewController.swift */; };
 		9C6097341E254CAC00A54979 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6097331E254CAC00A54979 /* DetailViewController.swift */; };
+		9C6097361E257FBD00A54979 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C6097351E257FBD00A54979 /* Social.framework */; };
+		9C6097381E2593E000A54979 /* BarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6097371E2593E000A54979 /* BarTableViewController.swift */; };
 		CC81B495C3157D3600DF5F95 /* Pods_AC3_2_Cheers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014E24C59D16F65B92F43431 /* Pods_AC3_2_Cheers.framework */; };
 		D372221B1E25354B00E6B2D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D372221A1E25354B00E6B2D5 /* AppDelegate.swift */; };
 		D37222201E25354B00E6B2D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D372221E1E25354B00E6B2D5 /* Main.storyboard */; };
@@ -24,6 +26,8 @@
 		7C5D2707D79EE03999705F9A /* Pods-AC3.2-Cheers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AC3.2-Cheers.release.xcconfig"; path = "Pods/Target Support Files/Pods-AC3.2-Cheers/Pods-AC3.2-Cheers.release.xcconfig"; sourceTree = "<group>"; };
 		9C6097311E25478D00A54979 /* CheersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheersViewController.swift; sourceTree = "<group>"; };
 		9C6097331E254CAC00A54979 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		9C6097351E257FBD00A54979 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		9C6097371E2593E000A54979 /* BarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarTableViewController.swift; sourceTree = "<group>"; };
 		D37222171E25354B00E6B2D5 /* AC3.2-Cheers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AC3.2-Cheers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D372221A1E25354B00E6B2D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D372221F1E25354B00E6B2D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -41,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C6097361E257FBD00A54979 /* Social.framework in Frameworks */,
 				CC81B495C3157D3600DF5F95 /* Pods_AC3_2_Cheers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -101,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				9C6097311E25478D00A54979 /* CheersViewController.swift */,
+				9C6097371E2593E000A54979 /* BarTableViewController.swift */,
 				9C6097331E254CAC00A54979 /* DetailViewController.swift */,
 			);
 			name = Controllers;
@@ -118,6 +124,7 @@
 		DC87FCFD62880A32B9F6DF17 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9C6097351E257FBD00A54979 /* Social.framework */,
 				014E24C59D16F65B92F43431 /* Pods_AC3_2_Cheers.framework */,
 			);
 			name = Frameworks;
@@ -167,6 +174,7 @@
 				TargetAttributes = {
 					D37222161E25354B00E6B2D5 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 9F7X637BX9;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -257,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D37222351E2537BD00E6B2D5 /* BasicCheersTableViewCell.swift in Sources */,
+				9C6097381E2593E000A54979 /* BarTableViewController.swift in Sources */,
 				D37222231E25354B00E6B2D5 /* AC3_2_Cheers.xcdatamodeld in Sources */,
 				9C6097341E254CAC00A54979 /* DetailViewController.swift in Sources */,
 				9C6097321E25478D00A54979 /* CheersViewController.swift in Sources */,
@@ -384,6 +393,7 @@
 			baseConfigurationReference = E20870E44545D08393164D3B /* Pods-AC3.2-Cheers.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9F7X637BX9;
 				INFOPLIST_FILE = "AC3.2-Cheers/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "nyc.c4q.martyav.AC3-2-Cheers";
@@ -397,6 +407,7 @@
 			baseConfigurationReference = 7C5D2707D79EE03999705F9A /* Pods-AC3.2-Cheers.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9F7X637BX9;
 				INFOPLIST_FILE = "AC3.2-Cheers/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "nyc.c4q.martyav.AC3-2-Cheers";
