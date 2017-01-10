@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--CHeeRS-->
+        <!--CHEERS-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="CheersViewController" customModule="AC3_2_Cheers" customModuleProvider="target" sceneMemberID="viewController">
@@ -28,6 +28,7 @@
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a5o-Ju-Y0W">
                                 <rect key="frame" x="330" y="64" width="45" height="43"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="nMM-f0-sgi"/>
                                     <constraint firstAttribute="height" constant="43" id="zvW-mW-TEA"/>
@@ -66,7 +67,7 @@
                             <constraint firstAttribute="trailing" secondItem="qhl-LX-ShA" secondAttribute="trailing" id="wxf-eD-ts9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="CHeeRS" id="3nn-ai-Hrk"/>
+                    <navigationItem key="navigationItem" title="CHEERS" id="3nn-ai-Hrk"/>
                     <connections>
                         <outlet property="mapView" destination="nTk-cG-djD" id="h2q-mx-E7B"/>
                         <outlet property="tableView" destination="qhl-LX-ShA" id="XVz-dU-85P"/>
