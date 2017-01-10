@@ -22,6 +22,7 @@
 		D37222351E2537BD00E6B2D5 /* BasicCheersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37222331E2537BD00E6B2D5 /* BasicCheersTableViewCell.swift */; };
 		D37222361E2537BD00E6B2D5 /* BasicCheersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D37222341E2537BD00E6B2D5 /* BasicCheersTableViewCell.xib */; };
 		D37222381E2564F000E6B2D5 /* [Viva La Fiesta].ttf in Resources */ = {isa = PBXBuildFile; fileRef = D37222371E2564F000E6B2D5 /* [Viva La Fiesta].ttf */; };
+		D372223E1E25A2FD00E6B2D5 /* CellDisplay&Functionality.swift in Sources */ = {isa = PBXBuildFile; fileRef = D372223D1E25A2FD00E6B2D5 /* CellDisplay&Functionality.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		D37222331E2537BD00E6B2D5 /* BasicCheersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCheersTableViewCell.swift; sourceTree = "<group>"; };
 		D37222341E2537BD00E6B2D5 /* BasicCheersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicCheersTableViewCell.xib; sourceTree = "<group>"; };
 		D37222371E2564F000E6B2D5 /* [Viva La Fiesta].ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "[Viva La Fiesta].ttf"; sourceTree = "<group>"; };
+		D372223D1E25A2FD00E6B2D5 /* CellDisplay&Functionality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CellDisplay&Functionality.swift"; sourceTree = "<group>"; };
 		E20870E44545D08393164D3B /* Pods-AC3.2-Cheers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AC3.2-Cheers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AC3.2-Cheers/Pods-AC3.2-Cheers.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +91,7 @@
 		D37222191E25354B00E6B2D5 /* AC3.2-Cheers */ = {
 			isa = PBXGroup;
 			children = (
+				D372223C1E25A2D300E6B2D5 /* HelperFunctions */,
 				D372221A1E25354B00E6B2D5 /* AppDelegate.swift */,
 				9C26E5F51E2568E000E24824 /* Networking */,
 				D37222311E25372000E6B2D5 /* Controllers */,
@@ -145,6 +148,15 @@
 				D37222371E2564F000E6B2D5 /* [Viva La Fiesta].ttf */,
 			);
 			name = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		D372223C1E25A2D300E6B2D5 /* HelperFunctions */ = {
+			isa = PBXGroup;
+			children = (
+				D372223D1E25A2FD00E6B2D5 /* CellDisplay&Functionality.swift */,
+			);
+			name = HelperFunctions;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		DC87FCFD62880A32B9F6DF17 /* Frameworks */ = {
@@ -291,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D372223E1E25A2FD00E6B2D5 /* CellDisplay&Functionality.swift in Sources */,
 				D37222351E2537BD00E6B2D5 /* BasicCheersTableViewCell.swift in Sources */,
 				9C6097381E2593E000A54979 /* BarTableViewController.swift in Sources */,
 				D37222231E25354B00E6B2D5 /* AC3_2_Cheers.xcdatamodeld in Sources */,

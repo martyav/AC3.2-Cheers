@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+func convert(meters: Int) -> String {
+    let miles = Double(meters) * 0.0006
+    return String(format: "%.1f", miles) + " miles away"
+}
+
+

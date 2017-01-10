@@ -40,7 +40,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         tableView.delegate = self
         tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
-        //getData()
+        getData()
         initializeFetchedResultsController()
         
         
@@ -127,7 +127,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "cheers", for: indexPath) as!BasicCheersTableViewCell
         let venueObj = fetchedResultsController.object(at: indexPath)
         cell.venueName.text = venueObj.name
-        cell.distance.text = String(venueObj.distance)
+        cell.distance.text = convert(meters: Int(venueObj.distance))
         let price = String(repeatElement("$", count: Int(venueObj.tier)))
         cell.pricing.text = price
         //cell.favorite.backgroundColor = .white
