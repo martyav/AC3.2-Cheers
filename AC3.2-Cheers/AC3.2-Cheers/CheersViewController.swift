@@ -36,13 +36,13 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         locationManager.delegate = self
         mapView.delegate = self
+        
         tableView.register(UINib(nibName: "BasicCheersTableViewCell", bundle: nil),forCellReuseIdentifier: "cheers")
         tableView.delegate = self
         tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
         //getData()
         initializeFetchedResultsController()
-        
         
     }
     //MARK: - Networking
@@ -100,11 +100,41 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("getting location!")
         dump(locations)
+        
+        guard let validLocation = locations.first else { return }
+        
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(validLocation.coordinate, 500, 500)
+        mapView.setRegion(coordinateRegion, animated: true)
+        
+        let annotation: MKPointAnnotation = MKPointAnnotation()
+        annotation.coordinate = validLocation.coordinate
+        annotation.title = "This is you!"
+        annotation.subtitle = "\(validLocation)"
+        mapView.addAnnotation(annotation)
+        
+        let cirlceOverLay: MKCircle = MKCircle(center: annotation.coordinate, radius: 100.0)
+        mapView.add(cirlceOverLay)
+        
+        geocoder.reverseGeocodeLocation(validLocation) { (placemark: [CLPlacemark]?, error: Error?) in
+            if error != nil {
+                dump(error!)
+                return
+            }
+            dump(placemark)
+            guard let _: CLPlacemark = placemark?.last else { return }
+        }
     }
     
     // MARK: - Mapview Delegate
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let circleOverlayRenderer: MKCircleRenderer = MKCircleRenderer(circle: overlay as! MKCircle)
+        circleOverlayRenderer.fillColor = UIColor.green.withAlphaComponent(0.25)
+        circleOverlayRenderer.strokeColor = .green
+        circleOverlayRenderer.lineWidth = 1.0
+        return circleOverlayRenderer
+    }
     
     // MARK: - TableView Delegate & Data Source
     
