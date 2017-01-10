@@ -7,9 +7,17 @@
 //
 
 import UIKit
+import FaveButton
 
 class BasicCheersTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var venueName: UILabel!
+    @IBOutlet weak var pricing: UILabel!
+    @IBOutlet weak var popularTimes: UILabel!
+    @IBOutlet weak var distance: UILabel!
+    @IBOutlet weak var favorite: FaveButton!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
