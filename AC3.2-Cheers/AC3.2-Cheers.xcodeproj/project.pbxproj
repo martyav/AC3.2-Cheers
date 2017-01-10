@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C26E5F01E2561FD00E24824 /* HappyHourVenue + populate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26E5EF1E2561FD00E24824 /* HappyHourVenue + populate.swift */; };
+		9C26E5F41E2568CB00E24824 /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26E5F31E2568CB00E24824 /* APIRequestManager.swift */; };
 		9C6097321E25478D00A54979 /* CheersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6097311E25478D00A54979 /* CheersViewController.swift */; };
 		9C6097341E254CAC00A54979 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6097331E254CAC00A54979 /* DetailViewController.swift */; };
 		9C6097361E257FBD00A54979 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C6097351E257FBD00A54979 /* Social.framework */; };
@@ -19,11 +21,14 @@
 		D37222281E25354B00E6B2D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D37222261E25354B00E6B2D5 /* LaunchScreen.storyboard */; };
 		D37222351E2537BD00E6B2D5 /* BasicCheersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37222331E2537BD00E6B2D5 /* BasicCheersTableViewCell.swift */; };
 		D37222361E2537BD00E6B2D5 /* BasicCheersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D37222341E2537BD00E6B2D5 /* BasicCheersTableViewCell.xib */; };
+		D37222381E2564F000E6B2D5 /* [Viva La Fiesta].ttf in Resources */ = {isa = PBXBuildFile; fileRef = D37222371E2564F000E6B2D5 /* [Viva La Fiesta].ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		014E24C59D16F65B92F43431 /* Pods_AC3_2_Cheers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AC3_2_Cheers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C5D2707D79EE03999705F9A /* Pods-AC3.2-Cheers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AC3.2-Cheers.release.xcconfig"; path = "Pods/Target Support Files/Pods-AC3.2-Cheers/Pods-AC3.2-Cheers.release.xcconfig"; sourceTree = "<group>"; };
+		9C26E5EF1E2561FD00E24824 /* HappyHourVenue + populate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HappyHourVenue + populate.swift"; sourceTree = "<group>"; };
+		9C26E5F31E2568CB00E24824 /* APIRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIRequestManager.swift; path = "AC3.2-Cheers/APIRequestManager.swift"; sourceTree = "<group>"; };
 		9C6097311E25478D00A54979 /* CheersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheersViewController.swift; sourceTree = "<group>"; };
 		9C6097331E254CAC00A54979 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		9C6097351E257FBD00A54979 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -37,6 +42,7 @@
 		D37222291E25354B00E6B2D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D37222331E2537BD00E6B2D5 /* BasicCheersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCheersTableViewCell.swift; sourceTree = "<group>"; };
 		D37222341E2537BD00E6B2D5 /* BasicCheersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicCheersTableViewCell.xib; sourceTree = "<group>"; };
+		D37222371E2564F000E6B2D5 /* [Viva La Fiesta].ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "[Viva La Fiesta].ttf"; sourceTree = "<group>"; };
 		E20870E44545D08393164D3B /* Pods-AC3.2-Cheers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AC3.2-Cheers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AC3.2-Cheers/Pods-AC3.2-Cheers.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -53,6 +59,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9C26E5F51E2568E000E24824 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				9C26E5F31E2568CB00E24824 /* APIRequestManager.swift */,
+			);
+			name = Networking;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		D372220E1E25354B00E6B2D5 = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				D372221A1E25354B00E6B2D5 /* AppDelegate.swift */,
+				9C26E5F51E2568E000E24824 /* Networking */,
 				D37222311E25372000E6B2D5 /* Controllers */,
 				D37222301E25371600E6B2D5 /* UI */,
 				D372222F1E25370C00E6B2D5 /* Model */,
@@ -87,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				D37222211E25354B00E6B2D5 /* AC3_2_Cheers.xcdatamodeld */,
+				9C26E5EF1E2561FD00E24824 /* HappyHourVenue + populate.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -94,6 +111,7 @@
 		D37222301E25371600E6B2D5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D37222391E2564FB00E6B2D5 /* LaunchScreen */,
 				D37222321E25373C00E6B2D5 /* Cells */,
 				D37222241E25354B00E6B2D5 /* Assets.xcassets */,
 				D37222261E25354B00E6B2D5 /* LaunchScreen.storyboard */,
@@ -119,6 +137,14 @@
 				D37222341E2537BD00E6B2D5 /* BasicCheersTableViewCell.xib */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		D37222391E2564FB00E6B2D5 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				D37222371E2564F000E6B2D5 /* [Viva La Fiesta].ttf */,
+			);
+			name = LaunchScreen;
 			sourceTree = "<group>";
 		};
 		DC87FCFD62880A32B9F6DF17 /* Frameworks */ = {
@@ -203,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D37222361E2537BD00E6B2D5 /* BasicCheersTableViewCell.xib in Resources */,
+				D37222381E2564F000E6B2D5 /* [Viva La Fiesta].ttf in Resources */,
 				D37222281E25354B00E6B2D5 /* LaunchScreen.storyboard in Resources */,
 				D37222251E25354B00E6B2D5 /* Assets.xcassets in Resources */,
 				D37222201E25354B00E6B2D5 /* Main.storyboard in Resources */,
@@ -267,6 +294,8 @@
 				D37222351E2537BD00E6B2D5 /* BasicCheersTableViewCell.swift in Sources */,
 				9C6097381E2593E000A54979 /* BarTableViewController.swift in Sources */,
 				D37222231E25354B00E6B2D5 /* AC3_2_Cheers.xcdatamodeld in Sources */,
+				9C26E5F01E2561FD00E24824 /* HappyHourVenue + populate.swift in Sources */,
+				9C26E5F41E2568CB00E24824 /* APIRequestManager.swift in Sources */,
 				9C6097341E254CAC00A54979 /* DetailViewController.swift in Sources */,
 				9C6097321E25478D00A54979 /* CheersViewController.swift in Sources */,
 				D372221B1E25354B00E6B2D5 /* AppDelegate.swift in Sources */,
