@@ -17,6 +17,7 @@
 		D37222281E25354B00E6B2D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D37222261E25354B00E6B2D5 /* LaunchScreen.storyboard */; };
 		D37222351E2537BD00E6B2D5 /* BasicCheersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37222331E2537BD00E6B2D5 /* BasicCheersTableViewCell.swift */; };
 		D37222361E2537BD00E6B2D5 /* BasicCheersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D37222341E2537BD00E6B2D5 /* BasicCheersTableViewCell.xib */; };
+		D37222381E2564F000E6B2D5 /* [Viva La Fiesta].ttf in Resources */ = {isa = PBXBuildFile; fileRef = D37222371E2564F000E6B2D5 /* [Viva La Fiesta].ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		D37222291E25354B00E6B2D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D37222331E2537BD00E6B2D5 /* BasicCheersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCheersTableViewCell.swift; sourceTree = "<group>"; };
 		D37222341E2537BD00E6B2D5 /* BasicCheersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicCheersTableViewCell.xib; sourceTree = "<group>"; };
+		D37222371E2564F000E6B2D5 /* [Viva La Fiesta].ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "[Viva La Fiesta].ttf"; sourceTree = "<group>"; };
 		E20870E44545D08393164D3B /* Pods-AC3.2-Cheers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AC3.2-Cheers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AC3.2-Cheers/Pods-AC3.2-Cheers.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +91,7 @@
 		D37222301E25371600E6B2D5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D37222391E2564FB00E6B2D5 /* LaunchScreen */,
 				D37222321E25373C00E6B2D5 /* Cells */,
 				D37222241E25354B00E6B2D5 /* Assets.xcassets */,
 				D37222261E25354B00E6B2D5 /* LaunchScreen.storyboard */,
@@ -113,6 +116,14 @@
 				D37222341E2537BD00E6B2D5 /* BasicCheersTableViewCell.xib */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		D37222391E2564FB00E6B2D5 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				D37222371E2564F000E6B2D5 /* [Viva La Fiesta].ttf */,
+			);
+			name = LaunchScreen;
 			sourceTree = "<group>";
 		};
 		DC87FCFD62880A32B9F6DF17 /* Frameworks */ = {
@@ -195,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D37222361E2537BD00E6B2D5 /* BasicCheersTableViewCell.xib in Resources */,
+				D37222381E2564F000E6B2D5 /* [Viva La Fiesta].ttf in Resources */,
 				D37222281E25354B00E6B2D5 /* LaunchScreen.storyboard in Resources */,
 				D37222251E25354B00E6B2D5 /* Assets.xcassets in Resources */,
 				D37222201E25354B00E6B2D5 /* Main.storyboard in Resources */,
