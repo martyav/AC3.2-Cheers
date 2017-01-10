@@ -43,23 +43,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="39z-1X-QQ2">
                                 <rect key="frame" x="0.0" y="44" width="375" height="366"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOADING BARS" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6M-SZ-kmN">
-                                        <rect key="frame" x="8" y="133" width="359" height="100"/>
-                                        <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="72"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <color key="shadowColor" red="0.059885784983634949" green="0.48562020063400269" blue="0.7531585693359375" alpha="1" colorSpace="calibratedRGB"/>
-                                        <size key="shadowOffset" width="-2" height="2"/>
-                                    </label>
-                                </subviews>
                                 <color key="backgroundColor" red="0.69411764705882351" green="0.88235294117647056" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="j6M-SZ-kmN" firstAttribute="leading" secondItem="39z-1X-QQ2" secondAttribute="leading" constant="8" id="WtI-4M-KwV"/>
-                                    <constraint firstAttribute="trailing" secondItem="j6M-SZ-kmN" secondAttribute="trailing" constant="8" id="c0x-bi-76A"/>
-                                    <constraint firstItem="j6M-SZ-kmN" firstAttribute="top" secondItem="39z-1X-QQ2" secondAttribute="top" constant="133" id="c50-SR-IAn"/>
-                                    <constraint firstAttribute="bottom" secondItem="j6M-SZ-kmN" secondAttribute="bottom" constant="133" id="y4R-xU-v3v"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
