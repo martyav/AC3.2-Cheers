@@ -172,9 +172,16 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cheers", for: indexPath) as! BasicCheersTableViewCell
         let venueObj = fetchedResultsController.object(at: indexPath)
+        let currencySymbol: Character
+        if let unwrapLocalCurrencySymbol = NSLocale.current.currencySymbol {
+            currencySymbol = Character(unwrapLocalCurrencySymbol)
+        } else {
+            currencySymbol = "$"
+        }
+        
         cell.venueName.text = venueObj.name
         cell.distance.text = venueObj.distanceFormatted()
-        let price = String(repeatElement("$",/*currencySymbol,*/ count: Int(venueObj.tier)))
+        let price = String(repeatElement(currencySymbol, count: Int(venueObj.tier)))
         cell.pricing.text = price
         cell.popularTimes.text = venueObj.status
 
