@@ -36,4 +36,23 @@ extension HappyHourVenue {
             self.status = status
         }
     }
+    
+    func convert(meters: Int16) -> String {
+        let miles = Double(meters) * 0.0006
+        return String(format: "%.1f", miles) + " miles away"
+    }
+    
+    // check user's prefered units based on locale...but allow them to switch (button in nav bar?)
+    
+    func distanceFormatted() -> String {
+        let locale = NSLocale.current
+        let isMetric = locale.usesMetricSystem
+        let distance = self.distance
+        
+        if isMetric {
+            return String(distance)
+        } else {
+            return convert(meters: distance)
+        }
+    }
 }
