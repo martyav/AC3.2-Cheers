@@ -116,6 +116,7 @@
 			children = (
 				D37222391E2564FB00E6B2D5 /* LaunchScreen */,
 				D37222321E25373C00E6B2D5 /* Cells */,
+				D37222371E2564F000E6B2D5 /* [Viva La Fiesta].ttf */,
 				D37222241E25354B00E6B2D5 /* Assets.xcassets */,
 				D37222261E25354B00E6B2D5 /* LaunchScreen.storyboard */,
 				D372221E1E25354B00E6B2D5 /* Main.storyboard */,
@@ -145,7 +146,6 @@
 		D37222391E2564FB00E6B2D5 /* LaunchScreen */ = {
 			isa = PBXGroup;
 			children = (
-				D37222371E2564F000E6B2D5 /* [Viva La Fiesta].ttf */,
 			);
 			name = LaunchScreen;
 			sourceTree = "<group>";
