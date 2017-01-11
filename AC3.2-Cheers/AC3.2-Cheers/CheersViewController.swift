@@ -163,49 +163,58 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         if let sections = fetchedResultsController.sections {
             let info: NSFetchedResultsSectionInfo = sections[section]
             print(info.numberOfObjects)
-
+            
             return info.numberOfObjects
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cheers", for: indexPath) as!BasicCheersTableViewCell
-        cell.delegate = self
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cheers", for: indexPath) as! BasicCheersTableViewCell
         let venueObj = fetchedResultsController.object(at: indexPath)
         cell.venueName.text = venueObj.name
         cell.distance.text = venueObj.distanceFormatted()
         let price = String(repeatElement("$",/*currencySymbol,*/ count: Int(venueObj.tier)))
         cell.pricing.text = price
         cell.popularTimes.text = venueObj.status
-
+        
+        if cell.delegate == nil {
+            cell.delegate = self
+        }
+        
         return cell
     }
     
     // Cell Fave Button
+    
+    func cellTapped(cell: UITableViewCell) {
+        self.favoriteButtonClicked(at: tableView.indexPath(for: cell)!)
+    }
     
     func favoriteButtonClicked(at index: IndexPath) {
         print("You clicked the fave button!!!")
         let currentVenue = fetchedResultsController.object(at: index)
         currentVenue.favorite = !currentVenue.favorite
         
-        if currentVenue.favorite {
-            // add to array that populates second tableview
-            let alertController = UIAlertController(title: "Cheers!", message: "You added \(currentVenue.name) to your favorites!", preferredStyle: UIAlertControllerStyle.alert)
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-                print("OK")
+        if let name = currentVenue.name {
+            if currentVenue.favorite {
+                // add to array that populates second tableview
+                let alertController = UIAlertController(title: "Cheers!", message: "You added \(name) to your favorites!", preferredStyle: UIAlertControllerStyle.alert)
+                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+                    print("OK")
+                }
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+                print("added to faves")
+            } else {
+                // remove from array that populates second tableview
+                let alertController = UIAlertController(title: "Jeers!", message: "You removed \(name) from favorites!", preferredStyle: UIAlertControllerStyle.alert)
+                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+                    print("OK")
+                }
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
             }
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-            print("added to faves")
-        } else {
-            // remove from array that populates second tableview
-            let alertController = UIAlertController(title: "Jeers!", message: "You removed \(currentVenue.name) from favorites!", preferredStyle: UIAlertControllerStyle.alert)
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-                print("OK")
-            }
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
             print("removed from faves")
         }
         
@@ -217,7 +226,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let request: NSFetchRequest<HappyHourVenue> = HappyHourVenue.fetchRequest()
         let sort = NSSortDescriptor(key: "tier", ascending: true)
         request.sortDescriptors = [sort]
-
+        
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController.delegate = self
         

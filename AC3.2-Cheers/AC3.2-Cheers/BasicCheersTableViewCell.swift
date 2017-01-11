@@ -10,7 +10,7 @@ import UIKit
 import FaveButton
 
 protocol FaveButtonDelegate {
-    func favoriteButtonClicked(at index:IndexPath)
+    func cellTapped(cell: UITableViewCell)
 }
 
 class BasicCheersTableViewCell: UITableViewCell {
@@ -21,7 +21,7 @@ class BasicCheersTableViewCell: UITableViewCell {
     @IBOutlet weak var distance: UILabel!
     @IBOutlet weak var faveIt: FaveButton!
     
-    var delegate: FaveButtonDelegate!
+    var delegate: FaveButtonDelegate?
     var indexPath: IndexPath!
     
     override func awakeFromNib() {
@@ -35,15 +35,10 @@ class BasicCheersTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    
-    
-//    @IBAction func makeFavorite(_ sender: FaveButton) {
-//        cell.favorite = !cell.favorite
-//        
-//        
-//    }
-    
-    @IBAction func faveIt(_ sender: UIButton) {
-        self.delegate.favoriteButtonClicked(at: indexPath)
+    @IBAction func favoriteIt(_ sender: UIButton) {
+        //self.delegate?.favoriteButtonClicked(at: indexPath)
+        if let unwrapDelegate = delegate {
+            unwrapDelegate.cellTapped(cell: self)
+        }
     }
 }

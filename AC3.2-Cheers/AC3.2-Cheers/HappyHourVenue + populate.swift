@@ -37,6 +37,7 @@ extension HappyHourVenue {
             self.tier = Int16(tier)
             self.message = message
             self.status = status
+            self.favorite = false
             //self.currencySymbol = NSLocale.current.currencySymbol
             return true
         }

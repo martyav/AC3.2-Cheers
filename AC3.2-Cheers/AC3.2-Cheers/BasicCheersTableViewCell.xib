@@ -76,7 +76,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="faveIt:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="07Y-zS-JJW"/>
+                                            <action selector="favoriteIt:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8Kr-bi-M6R"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yh7-PG-LQf">
@@ -102,7 +102,6 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="distance" destination="M3s-ER-mhg" id="FFC-Q5-v8u"/>
-                <outlet property="faveIt" destination="hC9-PG-utf" id="2U9-oR-QWd"/>
                 <outlet property="popularTimes" destination="FN5-SW-PBy" id="Se7-Gj-fNi"/>
                 <outlet property="pricing" destination="yh7-PG-LQf" id="03W-7w-Ocw"/>
                 <outlet property="venueName" destination="OFu-FG-B9S" id="6Ul-0E-vem"/>
