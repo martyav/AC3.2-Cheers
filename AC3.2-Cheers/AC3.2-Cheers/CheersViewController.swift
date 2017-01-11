@@ -159,11 +159,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "cheers", for: indexPath) as!BasicCheersTableViewCell
         let venueObj = fetchedResultsController.object(at: indexPath)
         cell.venueName.text = venueObj.name
-        if isMetric {
-            cell.distance.text = String(venueObj.distance)
-        } else {
-            cell.distance.text = convert(meters: venueObj.distance)
-        }
+        cell.distance.text = venueObj.distanceFormatted()
         let price = String(repeatElement("$", count: Int(venueObj.tier)))
         cell.pricing.text = price
         //cell.favorite.backgroundColor = .white
