@@ -18,21 +18,41 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupToolbar()
     }
     
-    // MARK: - Progress Bar
-    
+    // MARK: - Top Tool Bar and items
+    func setupToolbar() {
+        let toolbar: UIToolbar = UIToolbar()
+        toolbar.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44)
+        toolbar.backgroundColor = .orange
 
+        self.view.addSubview(toolbar)
+
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: DetailViewController.self, action: nil)
+        let button = UIBarButtonItem(title: "Share", style: UIBarButtonItemStyle.plain, target: self, action: #selector(shareOptionTapped))
+        toolbar.items = [flexibleSpace, button, flexibleSpace]
+        
+        // constraints
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
+        toolbar.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+        toolbar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        toolbar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    }
     
     // MARK: - Share Button
     
-    @IBAction func shareOptionTapped(_ sender: UIBarButtonItem) {
-        let activityViewController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+//    @IBAction func shareOptionTapped(_ sender: UIBarButtonItem) {
+    func shareOptionTapped(_ sender: UIBarButtonItem) {
+
+        let activityViewController = UIActivityViewController(activityItems: ["Check out this awesome bar! #cheers"], applicationActivities: nil)
         activityViewController.excludedActivityTypes = [UIActivityType.mail]
         self.present(activityViewController, animated: true, completion: nil)
     }
     
-    // MARK: - Tool Bar Item Action
+    // MARK: - Progress Bar
+    
+    // MARK: - Bottom Tool Bar Item Action
     
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         webView.goBack()
