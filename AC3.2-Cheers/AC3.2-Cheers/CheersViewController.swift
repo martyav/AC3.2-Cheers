@@ -45,7 +45,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         tableView.delegate = self
         tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
-        getData()
+        //getData()
         initializeFetchedResultsController()
         
     }
@@ -62,8 +62,11 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     //MARK: - Networking
     
-    func getData() {
-        APIRequestManager.manager.getData(endPoint: "https://api.foursquare.com/v2/venues/explore?ll=40.7,-74&oauth_token=RFQ43RJ4WUZSVKHUUEVX2DICWK23OAFJJXFIA222WPY25H02&v=20170110&section=drinks%20&query=happy%20hour") { (data: Data?) in
+    func getData(location: CLLocation) {
+        let userLong = String(location.coordinate.longitude)
+        let userLat = String(location.coordinate.latitude)
+        let endPoint = "https://api.foursquare.com/v2/venues/explore?ll=\(userLat),\(userLong)&oauth_token=RFQ43RJ4WUZSVKHUUEVX2DICWK23OAFJJXFIA222WPY25H02&v=20170110&section=drinks%20&query=happy%20hour"
+        APIRequestManager.manager.getData(endPoint: endPoint) { (data: Data?) in
             if let validData = data {
                 if let jsonData = try? JSONSerialization.jsonObject(with: validData, options: []) {
                     if let fullDict = jsonData as? [String: Any],
@@ -78,9 +81,6 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                             
                             for venueObj in items {
                                 let happyHourVenues = HappyHourVenue(context: context)
-                                //guard let venueDict = venueObj["venue"] as? [String: Any]  else {return}
-                                //happyHourVenues.populate(from: venueDict)
-                                
                                 let result = happyHourVenues.populate(from: venueObj)
                                 if !result {
                                     context.delete(happyHourVenues)
@@ -121,21 +121,14 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         dump(locations)
         
         guard let validLocation = locations.first else { return }
-        
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(validLocation.coordinate, 500, 500)
         mapView.setRegion(coordinateRegion, animated: true)
-        
         let annotation: MKPointAnnotation = MKPointAnnotation()
         annotation.coordinate = validLocation.coordinate
-        //annotation.coordinate.latitude
-        //annotation.coordinate.longitude
         annotation.title = "This is you!"
-//        annotation.subtitle = "\(validLocation)"
         mapView.addAnnotation(annotation)
-        
         let cirlceOverLay: MKCircle = MKCircle(center: annotation.coordinate, radius: 100.0)
         mapView.add(cirlceOverLay)
-        
         geocoder.reverseGeocodeLocation(validLocation) { (placemark: [CLPlacemark]?, error: Error?) in
             if error != nil {
                 dump(error!)
@@ -144,6 +137,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             dump(placemark)
             guard let _: CLPlacemark = placemark?.last else { return }
         }
+        getData(location: validLocation)
     }
     
     // MARK: - Mapview Delegate
@@ -190,9 +184,9 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func initializeFetchedResultsController() {
         let request: NSFetchRequest<HappyHourVenue> = HappyHourVenue.fetchRequest()
-        let sort = NSSortDescriptor(key: "distance", ascending: true)
+        let sort = NSSortDescriptor(key: "tier", ascending: true)
         request.sortDescriptors = [sort]
-        
+
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController.delegate = self
         
