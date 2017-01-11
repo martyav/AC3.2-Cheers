@@ -11,10 +11,12 @@ import MapKit
 import CoreLocation
 import CoreData
 
-class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
+class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, FaveButtonDelegate {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
+    
     
     let locationManager: CLLocationManager = {
         let location: CLLocationManager = CLLocationManager()
@@ -26,6 +28,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     let geocoder: CLGeocoder = CLGeocoder()
     var fetchedResultsController: NSFetchedResultsController<HappyHourVenue>!
     
+    
     var mainContext: NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
@@ -33,6 +36,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.isHidden = true
         
         locationManager.delegate = self
         mapView.delegate = self
@@ -41,14 +45,28 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         tableView.delegate = self
         tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
-        getData()
+        //getData()
         initializeFetchedResultsController()
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+    }
+    
+    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
+    }
+    
     //MARK: - Networking
     
-    func getData() {
-        APIRequestManager.manager.getData(endPoint: "https://api.foursquare.com/v2/venues/explore?ll=40.7,-74&oauth_token=RFQ43RJ4WUZSVKHUUEVX2DICWK23OAFJJXFIA222WPY25H02&v=20170110&section=drinks%20&query=happy%20hour") { (data: Data?) in
+    func getData(location: CLLocation) {
+        let userLong = String(location.coordinate.longitude)
+        let userLat = String(location.coordinate.latitude)
+        let endPoint = "https://api.foursquare.com/v2/venues/explore?ll=\(userLat),\(userLong)&oauth_token=RFQ43RJ4WUZSVKHUUEVX2DICWK23OAFJJXFIA222WPY25H02&v=20170110&section=drinks%20&query=happy%20hour"
+        APIRequestManager.manager.getData(endPoint: endPoint) { (data: Data?) in
             if let validData = data {
                 if let jsonData = try? JSONSerialization.jsonObject(with: validData, options: []) {
                     if let fullDict = jsonData as? [String: Any],
@@ -62,21 +80,21 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                             context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
                             
                             for venueObj in items {
-                                guard let venueDict = venueObj["venue"] as? [String: Any]  else {return}
                                 let happyHourVenues = HappyHourVenue(context: context)
-                                    happyHourVenues.populate(from: venueDict)
-                               // happyHourVenues.populate(from: venueObj)
-                                
+                                let result = happyHourVenues.populate(from: venueObj)
+                                if !result {
+                                    context.delete(happyHourVenues)
+                                }
                             }
-                                do {
-                                    try  context.save()
-                                }
-                                catch let error {
-                                    print(error)
-                                }
-                                DispatchQueue.main.async {
-                                    self.initializeFetchedResultsController()
-                                    self.tableView.reloadData()
+                            do {
+                                try  context.save()
+                            }
+                            catch let error {
+                                print(error)
+                            }
+                            DispatchQueue.main.async {
+                                self.initializeFetchedResultsController()
+                                self.tableView.reloadData()
                             }
                         }
                     }
@@ -103,19 +121,14 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         dump(locations)
         
         guard let validLocation = locations.first else { return }
-        
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(validLocation.coordinate, 500, 500)
         mapView.setRegion(coordinateRegion, animated: true)
-        
         let annotation: MKPointAnnotation = MKPointAnnotation()
         annotation.coordinate = validLocation.coordinate
         annotation.title = "This is you!"
-//        annotation.subtitle = "\(validLocation)"
         mapView.addAnnotation(annotation)
-        
         let cirlceOverLay: MKCircle = MKCircle(center: annotation.coordinate, radius: 100.0)
         mapView.add(cirlceOverLay)
-        
         geocoder.reverseGeocodeLocation(validLocation) { (placemark: [CLPlacemark]?, error: Error?) in
             if error != nil {
                 dump(error!)
@@ -124,6 +137,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             dump(placemark)
             guard let _: CLPlacemark = placemark?.last else { return }
         }
+        getData(location: validLocation)
     }
     
     // MARK: - Mapview Delegate
@@ -149,27 +163,68 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         if let sections = fetchedResultsController.sections {
             let info: NSFetchedResultsSectionInfo = sections[section]
             print(info.numberOfObjects)
-
+            
             return info.numberOfObjects
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cheers", for: indexPath) as!BasicCheersTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cheers", for: indexPath) as! BasicCheersTableViewCell
         let venueObj = fetchedResultsController.object(at: indexPath)
         cell.venueName.text = venueObj.name
         cell.distance.text = venueObj.distanceFormatted()
         let price = String(repeatElement("$",/*currencySymbol,*/ count: Int(venueObj.tier)))
         cell.pricing.text = price
-        cell.popularTimes.text = "  "
+        cell.popularTimes.text = venueObj.status
+        
+        if cell.delegate == nil {
+            cell.delegate = self
+        }
+        
         return cell
     }
+    
+    // Cell Fave Button
+    
+    func cellTapped(cell: UITableViewCell) {
+        self.favoriteButtonClicked(at: tableView.indexPath(for: cell)!)
+    }
+    
+    func favoriteButtonClicked(at index: IndexPath) {
+        print("You clicked the fave button!!!")
+        let currentVenue = fetchedResultsController.object(at: index)
+        currentVenue.favorite = !currentVenue.favorite
+        
+        if let name = currentVenue.name {
+            if currentVenue.favorite {
+                // add to array that populates second tableview
+                let alertController = UIAlertController(title: "Cheers!", message: "You added \(name) to your favorites!", preferredStyle: UIAlertControllerStyle.alert)
+                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+                    print("OK")
+                }
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+                print("added to faves")
+            } else {
+                // remove from array that populates second tableview
+                let alertController = UIAlertController(title: "Jeers!", message: "You removed \(name) from favorites!", preferredStyle: UIAlertControllerStyle.alert)
+                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+                    print("OK")
+                }
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+            print("removed from faves")
+        }
+        
+    }
+    
     // MARK - FetchResultsController Functions
     
     func initializeFetchedResultsController() {
         let request: NSFetchRequest<HappyHourVenue> = HappyHourVenue.fetchRequest()
-        let sort = NSSortDescriptor(key: "distance", ascending: true)
+        let sort = NSSortDescriptor(key: "tier", ascending: true)
         request.sortDescriptors = [sort]
         
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
