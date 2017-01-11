@@ -151,6 +151,8 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let sections = fetchedResultsController.sections {
             let info: NSFetchedResultsSectionInfo = sections[section]
+            print(info.numberOfObjects)
+
             return info.numberOfObjects
         }
         return 0
@@ -160,11 +162,11 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "cheers", for: indexPath) as!BasicCheersTableViewCell
         let venueObj = fetchedResultsController.object(at: indexPath)
         cell.venueName.text = venueObj.name
-        cell.distance.text = convert(meters: Int(venueObj.distance))
-        let price = String(repeatElement("$", count: Int(venueObj.tier)))
+        cell.distance.text = venueObj.distanceFormatted()
+        let price = String(repeatElement("$",/*currencySymbol,*/ count: Int(venueObj.tier)))
         cell.pricing.text = price
-        //cell.favorite.backgroundColor = .white
         cell.popularTimes.text = venueObj.status
+
         return cell
     }
     // MARK - FetchResultsController Functions
