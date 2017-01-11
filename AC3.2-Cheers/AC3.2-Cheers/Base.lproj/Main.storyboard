@@ -115,50 +115,8 @@
                     <view key="view" contentMode="scaleToFill" id="oDw-m2-dT4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UMz-2O-0f4">
-                                <items>
-                                    <barButtonItem systemItem="rewind" id="tIy-ej-Sh9">
-                                        <connections>
-                                            <action selector="backButtonTapped:" destination="idk-Bt-hiu" id="RkS-3j-R9j"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="OWJ-C5-ohV"/>
-                                    <barButtonItem systemItem="refresh" id="ta4-Ih-n2l">
-                                        <connections>
-                                            <action selector="refreshButtonTapped:" destination="idk-Bt-hiu" id="Im4-Gw-3El"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="y2J-t9-4LS"/>
-                                    <barButtonItem systemItem="fastForward" id="uUg-UC-vKu">
-                                        <connections>
-                                            <action selector="goForwardButtonTapped:" destination="idk-Bt-hiu" id="3mU-Cr-KQh"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="miO-F5-uVU"/>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WMJ-V0-37K">
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="WMJ-V0-37K" firstAttribute="top" secondItem="miO-F5-uVU" secondAttribute="bottom" id="0Pv-Ih-yyv"/>
-                            <constraint firstItem="UMz-2O-0f4" firstAttribute="top" secondItem="WMJ-V0-37K" secondAttribute="bottom" id="42m-E4-zgP"/>
-                            <constraint firstItem="qgJ-nN-APH" firstAttribute="top" secondItem="UMz-2O-0f4" secondAttribute="bottom" id="Fds-z8-GOL"/>
-                            <constraint firstAttribute="trailing" secondItem="UMz-2O-0f4" secondAttribute="trailing" id="XAX-oT-bqr"/>
-                            <constraint firstItem="miO-F5-uVU" firstAttribute="top" secondItem="lGY-YV-Qpx" secondAttribute="bottom" constant="50" id="YRR-Rt-Rrg"/>
-                            <constraint firstItem="WMJ-V0-37K" firstAttribute="leading" secondItem="oDw-m2-dT4" secondAttribute="leading" id="he1-FL-Bn7"/>
-                            <constraint firstAttribute="trailing" secondItem="miO-F5-uVU" secondAttribute="trailing" id="s60-7K-Q8W"/>
-                            <constraint firstItem="miO-F5-uVU" firstAttribute="leading" secondItem="oDw-m2-dT4" secondAttribute="leading" id="vBP-Lr-JBa"/>
-                            <constraint firstAttribute="trailing" secondItem="WMJ-V0-37K" secondAttribute="trailing" id="vW6-6n-bbR"/>
-                            <constraint firstItem="UMz-2O-0f4" firstAttribute="leading" secondItem="oDw-m2-dT4" secondAttribute="leading" id="vYK-lK-Xd0"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="webView" destination="WMJ-V0-37K" id="kh0-qX-Nob"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZPs-Q1-C8F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -169,7 +127,7 @@
             <objects>
                 <navigationController title="CHEERS" automaticallyAdjustsScrollViewInsets="NO" id="fgl-MU-naa" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Uzn-ht-f99">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uzn-ht-f99">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.99215686270000003" green="0.74901960779999999" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
