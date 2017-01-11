@@ -34,6 +34,7 @@ extension HappyHourVenue {
             self.tier = Int16(tier)
             self.message = message
             self.status = status
+            //self.currencySymbol = NSLocale.current.currencySymbol
         }
     }
     
@@ -45,9 +46,10 @@ extension HappyHourVenue {
     // check user's prefered units based on locale...but allow them to switch (button in nav bar?)
     
     func distanceFormatted() -> String {
+        let distance = self.distance
+        
         let locale = NSLocale.current
         let isMetric = locale.usesMetricSystem
-        let distance = self.distance
         
         if isMetric {
             return String(distance)
@@ -55,4 +57,6 @@ extension HappyHourVenue {
             return convert(meters: distance)
         }
     }
+    
+    
 }

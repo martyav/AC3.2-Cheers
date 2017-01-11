@@ -160,9 +160,8 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let venueObj = fetchedResultsController.object(at: indexPath)
         cell.venueName.text = venueObj.name
         cell.distance.text = venueObj.distanceFormatted()
-        let price = String(repeatElement("$", count: Int(venueObj.tier)))
+        let price = String(repeatElement("$",/*currencySymbol,*/ count: Int(venueObj.tier)))
         cell.pricing.text = price
-        //cell.favorite.backgroundColor = .white
         cell.popularTimes.text = "  "
         return cell
     }
