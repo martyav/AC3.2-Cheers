@@ -11,23 +11,20 @@ import MapKit
 import CoreLocation
 import CoreData
 
-class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, FaveButtonDelegate {
-    
+class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, Tappable {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
     
-    
+
+    let geocoder: CLGeocoder = CLGeocoder()
+    var fetchedResultsController: NSFetchedResultsController<HappyHourVenue>!
     let locationManager: CLLocationManager = {
         let location: CLLocationManager = CLLocationManager()
         location.desiredAccuracy = kCLLocationAccuracyHundredMeters
         location.distanceFilter = 50.0
         return location
     }()
-    
-    let geocoder: CLGeocoder = CLGeocoder()
-    var fetchedResultsController: NSFetchedResultsController<HappyHourVenue>!
-    
     
     var mainContext: NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -36,28 +33,37 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicator.isHidden = true
         
+        activityIndicator.isHidden = true
         locationManager.delegate = self
         mapView.delegate = self
-        
-        tableView.register(UINib(nibName: "BasicCheersTableViewCell", bundle: nil),forCellReuseIdentifier: "cheers")
         tableView.delegate = self
         tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
-        //getData()
+        tableView.register(UINib(nibName: "BasicCheersTableViewCell", bundle: nil),forCellReuseIdentifier: "cheers")
+        
         initializeFetchedResultsController()
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear (_ animated: Bool) {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
     }
     
-    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
+    func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
         activityIndicator.stopAnimating()
         activityIndicator.isHidden = true
+    }
+    
+    func mapViewDidFailLoadingMap(_ mapView: MKMapView, withError error: Error) {
+        let alertController = UIAlertController(title: "Oops!", message: "Our map isn't working right now!", preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+            print(error)
+        }
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+        print("map failed to load")
     }
     
     //MARK: - Networking
@@ -73,21 +79,20 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                         let response = fullDict["response"] as? [String:Any],
                         let groups = response["groups"] as? [[String:AnyObject]],
                         let items = groups[0]["items"] as? [[String: Any]] {
-                        
                         let appDelegate = UIApplication.shared.delegate as! AppDelegate
                         let pc = appDelegate.persistentContainer
                         pc.performBackgroundTask { (context: NSManagedObjectContext) in
                             context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-                            
                             for venueObj in items {
                                 let happyHourVenues = HappyHourVenue(context: context)
                                 let result = happyHourVenues.populate(from: venueObj)
+                                
                                 if !result {
                                     context.delete(happyHourVenues)
                                 }
                             }
                             do {
-                                try  context.save()
+                                try context.save()
                             }
                             catch let error {
                                 print(error)
@@ -102,7 +107,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             }
         }
     }
-        
+    
     // MARK: - CoreLocation Delegate
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -119,7 +124,6 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         dump(locations)
-        
         guard let validLocation = locations.first else { return }
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(validLocation.coordinate, 500, 500)
         mapView.setRegion(coordinateRegion, animated: true)
@@ -144,9 +148,9 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let circleOverlayRenderer: MKCircleRenderer = MKCircleRenderer(circle: overlay as! MKCircle)
-        circleOverlayRenderer.fillColor = UIColor.green.withAlphaComponent(0.25)
-        circleOverlayRenderer.strokeColor = .green
-        circleOverlayRenderer.lineWidth = 1.0
+        circleOverlayRenderer.fillColor = UIColor.orange.withAlphaComponent(0.25)
+        circleOverlayRenderer.strokeColor = .orange
+        circleOverlayRenderer.lineWidth = 3.0
         return circleOverlayRenderer
     }
     
@@ -162,8 +166,6 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let sections = fetchedResultsController.sections {
             let info: NSFetchedResultsSectionInfo = sections[section]
-            print(info.numberOfObjects)
-            
             return info.numberOfObjects
         }
         return 0
@@ -173,24 +175,23 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "cheers", for: indexPath) as! BasicCheersTableViewCell
         let venueObj = fetchedResultsController.object(at: indexPath)
         let currencySymbol: Character
+        
         if let unwrapLocalCurrencySymbol = NSLocale.current.currencySymbol {
             currencySymbol = Character(unwrapLocalCurrencySymbol)
         } else {
             currencySymbol = "$"
         }
-        
+        if cell.faveIt != nil {
+            cell.faveIt.isSelected = venueObj.favorite
+        }
         cell.venueName.text = venueObj.name
         cell.distance.text = venueObj.distanceFormatted()
         let price = String(repeatElement(currencySymbol, count: Int(venueObj.tier)))
         cell.pricing.text = price
         cell.popularTimes.text = venueObj.status
-
+        
         if cell.delegate == nil {
             cell.delegate = self
-        }
-        
-        if cell.faveIt != nil {
-            cell.faveIt.isSelected = venueObj.favorite
         }
         
         return cell
@@ -251,7 +252,6 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     /*
      // MARK: - Navigation
      
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.

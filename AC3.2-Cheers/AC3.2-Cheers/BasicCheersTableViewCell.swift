@@ -9,12 +9,11 @@
 import UIKit
 import FaveButton
 
-protocol FaveButtonDelegate {
+protocol Tappable {
     func cellTapped(cell: UITableViewCell)
 }
 
 class BasicCheersTableViewCell: UITableViewCell {
-
     @IBOutlet weak var venueName: UILabel!
     @IBOutlet weak var pricing: UILabel!
     @IBOutlet weak var popularTimes: UILabel!
@@ -23,17 +22,17 @@ class BasicCheersTableViewCell: UITableViewCell {
     @IBInspectable public var normalColor: UIColor = .gray
     @IBInspectable public var selectedColor: UIColor = .red
     
-    var delegate: FaveButtonDelegate?
+    var delegate: Tappable?
     var indexPath: IndexPath!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.faveIt?.isSelected = false
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     

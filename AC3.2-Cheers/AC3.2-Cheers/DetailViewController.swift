@@ -11,7 +11,6 @@ import Social
 import WebKit
 
 class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
-    
     //    var webView: WKWebView!
     var progressView: UIProgressView!
     var happyHour: HappyHourVenue!
@@ -35,6 +34,7 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     }
     
     // MARK: - API Call
+    
     //happyHour.id
     func getBusinessData() {
         APIRequestManager.manager.getData(endPoint: "https://api.foursquare.com/v2/venues/40a55d80f964a52020f31ee3/hours?oauth_token=RFQ43RJ4WUZSVKHUUEVX2DICWK23OAFJJXFIA222WPY25H02&v=20170111&VENUE_ID=51e6bcf2498e7de23cab435b") { (data: Data?) in
@@ -204,7 +204,6 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     }
     
     func shareOptionTapped(_ sender: UIBarButtonItem) {
-        
         let activityViewController = UIActivityViewController(activityItems: ["Check out this awesome bar! #cheers"], applicationActivities: nil)
         activityViewController.excludedActivityTypes = [UIActivityType.mail]
         self.present(activityViewController, animated: true, completion: nil)
