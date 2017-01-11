@@ -13,6 +13,7 @@
 		9C6097341E254CAC00A54979 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6097331E254CAC00A54979 /* DetailViewController.swift */; };
 		9C6097361E257FBD00A54979 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C6097351E257FBD00A54979 /* Social.framework */; };
 		9C6097381E2593E000A54979 /* BarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6097371E2593E000A54979 /* BarTableViewController.swift */; };
+		9C6CBE481E26E71D006D7156 /* Date+DateString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6CBE471E26E71D006D7156 /* Date+DateString.swift */; };
 		CC81B495C3157D3600DF5F95 /* Pods_AC3_2_Cheers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014E24C59D16F65B92F43431 /* Pods_AC3_2_Cheers.framework */; };
 		D372221B1E25354B00E6B2D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D372221A1E25354B00E6B2D5 /* AppDelegate.swift */; };
 		D37222201E25354B00E6B2D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D372221E1E25354B00E6B2D5 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 		9C6097331E254CAC00A54979 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		9C6097351E257FBD00A54979 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		9C6097371E2593E000A54979 /* BarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarTableViewController.swift; sourceTree = "<group>"; };
+		9C6CBE471E26E71D006D7156 /* Date+DateString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+DateString.swift"; sourceTree = "<group>"; };
 		D37222171E25354B00E6B2D5 /* AC3.2-Cheers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AC3.2-Cheers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D372221A1E25354B00E6B2D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D372221F1E25354B00E6B2D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -68,6 +70,14 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		9C6CBE491E26E723006D7156 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				9C6CBE471E26E71D006D7156 /* Date+DateString.swift */,
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
 		D372220E1E25354B00E6B2D5 = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				D372221A1E25354B00E6B2D5 /* AppDelegate.swift */,
+				9C6CBE491E26E723006D7156 /* Extension */,
 				9C26E5F51E2568E000E24824 /* Networking */,
 				D37222311E25372000E6B2D5 /* Controllers */,
 				D37222301E25371600E6B2D5 /* UI */,
@@ -298,6 +309,7 @@
 				9C26E5F41E2568CB00E24824 /* APIRequestManager.swift in Sources */,
 				9C6097341E254CAC00A54979 /* DetailViewController.swift in Sources */,
 				9C6097321E25478D00A54979 /* CheersViewController.swift in Sources */,
+				9C6CBE481E26E71D006D7156 /* Date+DateString.swift in Sources */,
 				D372221B1E25354B00E6B2D5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
