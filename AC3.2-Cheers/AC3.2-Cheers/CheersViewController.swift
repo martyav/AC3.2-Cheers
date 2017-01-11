@@ -84,7 +84,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             }
         }
     }
-    
+        
     // MARK: - CoreLocation Delegate
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
