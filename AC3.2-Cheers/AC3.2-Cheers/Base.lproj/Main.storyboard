@@ -129,8 +129,6 @@
                     <view key="view" contentMode="scaleToFill" id="oDw-m2-dT4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-<<<<<<< HEAD
-=======
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UMz-2O-0f4">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
