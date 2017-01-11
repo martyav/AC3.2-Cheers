@@ -12,7 +12,6 @@ import WebKit
 
 class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     
-    //    var webView: WKWebView!
     var progressView: UIProgressView!
     var happyHour: HappyHourVenue!
     var webView: WKWebView = WKWebView()
@@ -29,15 +28,23 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         getBusinessData()
         
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        
         let myURL = URL(string: "https://www.foursquare.com")
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
+    }
+
+    deinit {
+        webView.removeObserver(self, forKeyPath: "estimatedProgress")
     }
     
     // MARK: - API Call
     //happyHour.id
     func getBusinessData() {
-        APIRequestManager.manager.getData(endPoint: "https://api.foursquare.com/v2/venues/40a55d80f964a52020f31ee3/hours?oauth_token=RFQ43RJ4WUZSVKHUUEVX2DICWK23OAFJJXFIA222WPY25H02&v=20170111&VENUE_ID=51e6bcf2498e7de23cab435b") { (data: Data?) in
+        
+        let date = Date()
+        
+        APIRequestManager.manager.getData(endPoint: "https://api.foursquare.com/v2/venues/40a55d80f964a52020f31ee3/hours?oauth_token=RFQ43RJ4WUZSVKHUUEVX2DICWK23OAFJJXFIA222WPY25H02&v=\(date.dateString)&VENUE_ID=51e6bcf2498e7de23cab435b") { (data: Data?) in
             if let validData = data {
                 if let json = try? JSONSerialization.jsonObject(with: validData, options: []) {
                     var populartimesArray: [String] = []
@@ -139,10 +146,10 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     // MARK: - Label
     
     func setupLabel() {
-        popularLabel.text = "Testing label jhjhjhvhgvhgvhgvefjhdsjfhdbsjhfbkhsbkhjdsbjhfsbdjhsdbjdhsfb"
+        popularLabel.text = "LOADING..."
         popularLabel.textAlignment = .center
         popularLabel.numberOfLines = 0
-        popularLabel.font = UIFont.systemFont(ofSize: 13)
+        popularLabel.font = UIFont.systemFont(ofSize: 15)
         view.addSubview(popularLabel)
         
         popularLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -160,7 +167,6 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     func setupWebView() {
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
-        //self.edgesForExtendedLayout = []
         webView.uiDelegate = self
         webView.navigationDelegate = self
         webView.backgroundColor = .yellow
@@ -189,18 +195,15 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     // MARK: - Button Action
     
     func backButtonTapped(_ sender: UIBarButtonItem) {
-        print("go back works")
-        //        webView.goBack()
+        webView.goBack()
     }
     
     func refreshButtonTapped(_ sender: UIBarButtonItem) {
-        print("refresh works")
-        //        webView.reload()
+        webView.reload()
     }
     
     func goForwardButtonTapped(_ sender: UIBarButtonItem) {
-        print("forward works")
-        //        webView.goForward()
+        webView.goForward()
     }
     
     func shareOptionTapped(_ sender: UIBarButtonItem) {
