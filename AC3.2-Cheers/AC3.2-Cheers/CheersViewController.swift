@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 import CoreData
 
-class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
+class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, FaveButtonDelegate {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
@@ -177,6 +177,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cheers", for: indexPath) as!BasicCheersTableViewCell
+        cell.delegate = self
         let venueObj = fetchedResultsController.object(at: indexPath)
         cell.venueName.text = venueObj.name
         cell.distance.text = venueObj.distanceFormatted()
@@ -186,6 +187,36 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
         return cell
     }
+    
+    // Cell Fave Button
+    
+    func favoriteButtonClicked(at index: IndexPath) {
+        print("You clicked the fave button!!!")
+        let currentVenue = fetchedResultsController.object(at: index)
+        currentVenue.favorite = !currentVenue.favorite
+        
+        if currentVenue.favorite {
+            // add to array that populates second tableview
+            let alertController = UIAlertController(title: "Cheers!", message: "You added \(currentVenue.name) to your favorites!", preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+                print("OK")
+            }
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+            print("added to faves")
+        } else {
+            // remove from array that populates second tableview
+            let alertController = UIAlertController(title: "Jeers!", message: "You removed \(currentVenue.name) from favorites!", preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+                print("OK")
+            }
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+            print("removed from faves")
+        }
+        
+    }
+    
     // MARK - FetchResultsController Functions
     
     func initializeFetchedResultsController() {
