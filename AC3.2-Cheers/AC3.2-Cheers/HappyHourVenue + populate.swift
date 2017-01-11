@@ -9,10 +9,10 @@
 import Foundation
 
 extension HappyHourVenue {
-    func populate(from dict: [String: Any]) {
+    func populate(from dict: [String: Any]) -> Bool {
         guard let venueDict = dict["venue"] as? [String: Any]  else {
             print("blah")
-            return
+            return false
         }
         if let name = venueDict["name"] as? String,
             let id = venueDict["id"] as? String,
@@ -38,7 +38,9 @@ extension HappyHourVenue {
             self.message = message
             self.status = status
             //self.currencySymbol = NSLocale.current.currencySymbol
+            return true
         }
+        return false 
     }
     
     func convert(meters: Int16) -> String {

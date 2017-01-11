@@ -65,19 +65,22 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                             for venueObj in items {
                                 let happyHourVenues = HappyHourVenue(context: context)
                                 //guard let venueDict = venueObj["venue"] as? [String: Any]  else {return}
-                                    //happyHourVenues.populate(from: venueDict)
-                                happyHourVenues.populate(from: venueObj)
+                                //happyHourVenues.populate(from: venueDict)
                                 
+                                let result = happyHourVenues.populate(from: venueObj)
+                                if !result {
+                                    context.delete(happyHourVenues)
+                                }
                             }
-                                do {
-                                    try  context.save()
-                                }
-                                catch let error {
-                                    print(error)
-                                }
-                                DispatchQueue.main.async {
-                                    self.initializeFetchedResultsController()
-                                    self.tableView.reloadData()
+                            do {
+                                try  context.save()
+                            }
+                            catch let error {
+                                print(error)
+                            }
+                            DispatchQueue.main.async {
+                                self.initializeFetchedResultsController()
+                                self.tableView.reloadData()
                             }
                         }
                     }
