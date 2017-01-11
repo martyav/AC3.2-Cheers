@@ -89,7 +89,6 @@
 		D37222191E25354B00E6B2D5 /* AC3.2-Cheers */ = {
 			isa = PBXGroup;
 			children = (
-				D372223C1E25A2D300E6B2D5 /* HelperFunctions */,
 				D372221A1E25354B00E6B2D5 /* AppDelegate.swift */,
 				9C26E5F51E2568E000E24824 /* Networking */,
 				D37222311E25372000E6B2D5 /* Controllers */,
@@ -146,14 +145,6 @@
 			children = (
 			);
 			name = LaunchScreen;
-			sourceTree = "<group>";
-		};
-		D372223C1E25A2D300E6B2D5 /* HelperFunctions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = HelperFunctions;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		DC87FCFD62880A32B9F6DF17 /* Frameworks */ = {
