@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fgl-MU-naa">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fgl-MU-naa">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -24,7 +24,7 @@
                             <searchBar contentMode="redraw" placeholder="Enter your search here" translatesAutoresizingMaskIntoConstraints="NO" id="5UO-Rn-giR">
                                 <rect key="frame" x="0.0" y="64" width="330" height="44"/>
                                 <color key="barTintColor" red="1" green="0.73892586707198882" blue="0.32385646526369083" alpha="0.92509615384615385" colorSpace="calibratedRGB"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a5o-Ju-Y0W">
                                 <rect key="frame" x="330" y="64" width="45" height="43"/>
@@ -79,6 +79,7 @@
                     <navigationItem key="navigationItem" title="CHEERS" id="3nn-ai-Hrk"/>
                     <connections>
                         <outlet property="activityIndicator" destination="fKy-Cg-p6K" id="sNQ-aU-1OK"/>
+                        <outlet property="locationSearchBar" destination="5UO-Rn-giR" id="3x9-DC-5Ai"/>
                         <outlet property="mapView" destination="nTk-cG-djD" id="h2q-mx-E7B"/>
                         <outlet property="tableView" destination="qhl-LX-ShA" id="XVz-dU-85P"/>
                     </connections>
@@ -130,8 +131,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UMz-2O-0f4">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UMz-2O-0f4">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <barButtonItem systemItem="rewind" id="tIy-ej-Sh9">
                                         <connections>
@@ -152,15 +154,16 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="miO-F5-uVU">
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="miO-F5-uVU">
                                 <rect key="frame" x="0.0" y="114" width="375" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </progressView>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WMJ-V0-37K">
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WMJ-V0-37K">
                                 <rect key="frame" x="0.0" y="116" width="375" height="507"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>
->>>>>>> d5fc764eeef9ba8aab286676b339f766c5b3b5df
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
@@ -173,7 +176,7 @@
             <objects>
                 <navigationController title="CHEERS" automaticallyAdjustsScrollViewInsets="NO" id="fgl-MU-naa" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uzn-ht-f99">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Uzn-ht-f99">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.99215686270000003" green="0.74901960779999999" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>

@@ -11,8 +11,9 @@ import MapKit
 import CoreLocation
 import CoreData
 
-class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, FaveButtonDelegate {
+class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, FaveButtonDelegate, UISearchBarDelegate {
     
+    @IBOutlet weak var locationSearchBar: UISearchBar!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
@@ -45,8 +46,8 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         tableView.delegate = self
         tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
-        //getData()
         initializeFetchedResultsController()
+        locationSearchBar.delegate = self
         
     }
     
@@ -236,7 +237,30 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             fatalError("Failed to initialize FetchedResultsController: \(error)")
         }
     }
+    // Mark: - Search Bar
     
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        let geoCoder = CLGeocoder()
+       // guard let validText = searchBar.text else {return}
+        geoCoder.geocodeAddressString(searchBar.text!) { (placemarks:[CLPlacemark]?, error: Error?) in
+            if((error) != nil){
+                print("Error", error)
+            }
+            if let placemark = placemarks?.first {
+                guard let location = placemark.location else {return}
+                self.getData(location: location)
+                /*DispatchQueue.main.async {
+                    self.initializeFetchedResultsController()
+                    self.tableView.reloadData()
+                }*/
+            }
+        }
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+
     /*
      // MARK: - Navigation
      
