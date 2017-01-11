@@ -35,8 +35,12 @@ class BasicCheersTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
+    
 //    @IBAction func makeFavorite(_ sender: FaveButton) {
 //        cell.favorite = !cell.favorite
+//        
+//        
 //    }
     
     @IBAction func faveIt(_ sender: UIButton) {
