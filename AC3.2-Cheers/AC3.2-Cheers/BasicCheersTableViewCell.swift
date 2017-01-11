@@ -20,13 +20,15 @@ class BasicCheersTableViewCell: UITableViewCell {
     @IBOutlet weak var popularTimes: UILabel!
     @IBOutlet weak var distance: UILabel!
     @IBOutlet weak var faveIt: FaveButton!
+    @IBInspectable public var normalColor: UIColor = .gray
+    @IBInspectable public var selectedColor: UIColor = .red
     
     var delegate: FaveButtonDelegate?
     var indexPath: IndexPath!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.faveIt?.isSelected = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -36,9 +38,21 @@ class BasicCheersTableViewCell: UITableViewCell {
     }
     
     @IBAction func favoriteIt(_ sender: UIButton) {
-        //self.delegate?.favoriteButtonClicked(at: indexPath)
         if let unwrapDelegate = delegate {
             unwrapDelegate.cellTapped(cell: self)
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        print("reused")
+        
+        // Reset the cell for new row's data
+        self.faveIt.isSelected = false
+        print("\(self.faveIt?.isSelected)")
+        self.venueName?.text = ""
+        self.popularTimes?.text = ""
+        self.distance?.text = ""
+        self.pricing?.text = ""
     }
 }

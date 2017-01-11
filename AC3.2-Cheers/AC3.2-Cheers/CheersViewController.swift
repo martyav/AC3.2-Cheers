@@ -177,9 +177,13 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let price = String(repeatElement("$",/*currencySymbol,*/ count: Int(venueObj.tier)))
         cell.pricing.text = price
         cell.popularTimes.text = venueObj.status
-        
+
         if cell.delegate == nil {
             cell.delegate = self
+        }
+        
+        if cell.faveIt != nil {
+            cell.faveIt.isSelected = venueObj.favorite
         }
         
         return cell
@@ -214,8 +218,8 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 }
                 alertController.addAction(okAction)
                 self.present(alertController, animated: true, completion: nil)
+                print("removed from faves")
             }
-            print("removed from faves")
         }
         
     }
