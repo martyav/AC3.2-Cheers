@@ -13,8 +13,10 @@ import CoreData
 
 class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
+    
     
     let locationManager: CLLocationManager = {
         let location: CLLocationManager = CLLocationManager()
@@ -33,6 +35,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.isHidden = true
         
         locationManager.delegate = self
         mapView.delegate = self
@@ -45,6 +48,17 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         initializeFetchedResultsController()
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+    }
+    
+    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
+    }
+    
     //MARK: - Networking
     
     func getData() {
