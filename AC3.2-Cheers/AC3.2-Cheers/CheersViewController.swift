@@ -26,6 +26,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     let geocoder: CLGeocoder = CLGeocoder()
     var fetchedResultsController: NSFetchedResultsController<HappyHourVenue>!
     
+    
     var mainContext: NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
@@ -62,10 +63,10 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                             context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
                             
                             for venueObj in items {
-                                guard let venueDict = venueObj["venue"] as? [String: Any]  else {return}
                                 let happyHourVenues = HappyHourVenue(context: context)
-                                    happyHourVenues.populate(from: venueDict)
-                               // happyHourVenues.populate(from: venueObj)
+                                //guard let venueDict = venueObj["venue"] as? [String: Any]  else {return}
+                                    //happyHourVenues.populate(from: venueDict)
+                                happyHourVenues.populate(from: venueObj)
                                 
                             }
                                 do {
@@ -109,6 +110,8 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         let annotation: MKPointAnnotation = MKPointAnnotation()
         annotation.coordinate = validLocation.coordinate
+        //annotation.coordinate.latitude
+        //annotation.coordinate.longitude
         annotation.title = "This is you!"
 //        annotation.subtitle = "\(validLocation)"
         mapView.addAnnotation(annotation)
@@ -161,7 +164,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let price = String(repeatElement("$", count: Int(venueObj.tier)))
         cell.pricing.text = price
         //cell.favorite.backgroundColor = .white
-        cell.popularTimes.text = "  "
+        cell.popularTimes.text = venueObj.status
         return cell
     }
     // MARK - FetchResultsController Functions

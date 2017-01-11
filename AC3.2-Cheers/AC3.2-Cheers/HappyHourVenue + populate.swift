@@ -10,18 +10,21 @@ import Foundation
 
 extension HappyHourVenue {
     func populate(from dict: [String: Any]) {
-        //guard let venueDict = dict["venue"] as? [String: Any]  else {return}
-        if let name = dict["name"] as? String,
-            let id = dict["id"] as? String,
-            let contact = dict["contact"] as? [String:Any],
+        guard let venueDict = dict["venue"] as? [String: Any]  else {
+            print("blah")
+            return
+        }
+        if let name = venueDict["name"] as? String,
+            let id = venueDict["id"] as? String,
+            let contact = venueDict["contact"] as? [String:Any],
             let phoneNumb = contact["formattedPhone"] as? String,
-            let locationDict = dict["location"] as? [String: Any],
+            let locationDict = venueDict["location"] as? [String: Any],
             let distance = locationDict["distance"] as? Int,
             let addressArray = locationDict["formattedAddress"] as? [String],
-            let priceDict = dict["price"] as? [String:Any],
+            let priceDict = venueDict["price"] as? [String:Any],
             let tier = priceDict["tier"] as? Int,
             let message = priceDict["message"] as? String,
-            let hoursDict = dict["hours"] as? [String: Any],
+            let hoursDict = venueDict["hours"] as? [String: Any],
             let status = hoursDict["status"] as? String {
 
             self.name = name
