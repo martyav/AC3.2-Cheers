@@ -27,13 +27,11 @@ class BasicCheersTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.faveIt?.isSelected = false
+        self.venueName.text = "LOADING..."
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
     
     @IBAction func favoriteIt(_ sender: UIButton) {
@@ -44,12 +42,9 @@ class BasicCheersTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        print("reused")
         
-        // Reset the cell for new row's data
         self.faveIt.isSelected = false
-        print("\(self.faveIt?.isSelected)")
-        self.venueName?.text = ""
+        self.venueName?.text = "LOADING..."
         self.popularTimes?.text = ""
         self.distance?.text = ""
         self.pricing?.text = ""
