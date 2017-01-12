@@ -16,7 +16,6 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
     
-
     let geocoder: CLGeocoder = CLGeocoder()
     var fetchedResultsController: NSFetchedResultsController<HappyHourVenue>!
     let locationManager: CLLocationManager = {
