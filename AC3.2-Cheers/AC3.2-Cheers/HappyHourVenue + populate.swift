@@ -14,7 +14,6 @@ extension HappyHourVenue {
             print("blah")
             return false
         }
-        
         if let name = venueDict["name"] as? String,
             let id = venueDict["id"] as? String,
             let contact = venueDict["contact"] as? [String:Any],
@@ -27,7 +26,7 @@ extension HappyHourVenue {
             let message = priceDict["message"] as? String,
             let hoursDict = venueDict["hours"] as? [String: Any],
             let status = hoursDict["status"] as? String {
-            
+
             self.name = name
             self.id = id
             self.phoneNumber = phoneNumb
@@ -39,16 +38,18 @@ extension HappyHourVenue {
             self.message = message
             self.status = status
             self.favorite = false
-            
+            //self.currencySymbol = NSLocale.current.currencySymbol
             return true
         }
-        return false
+        return false 
     }
     
     func convert(meters: Int16) -> String {
         let miles = Double(meters) * 0.0006
         return String(format: "%.1f", miles) + " miles away"
     }
+    
+    // check user's prefered units based on locale...but allow them to switch (button in nav bar?)
     
     func distanceFormatted() -> String {
         let distance = self.distance
@@ -62,4 +63,6 @@ extension HappyHourVenue {
             return convert(meters: distance)
         }
     }
+    
+    
 }

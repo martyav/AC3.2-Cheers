@@ -9,8 +9,11 @@
 import UIKit
 
 class BarTableViewController: UITableViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
     }
     
     // MARK: - Table view data source
@@ -25,7 +28,9 @@ class BarTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BarCell", for: indexPath)
+        
         cell.textLabel?.text = "Testing"
+        
         return cell
     }
     
