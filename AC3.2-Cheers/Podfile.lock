@@ -1,12 +1,15 @@
 PODS:
   - FaveButton (2.0.2)
+  - SKSplashView (0.1.3)
 
 DEPENDENCIES:
   - FaveButton
+  - SKSplashView
 
 SPEC CHECKSUMS:
   FaveButton: e26f7964669b4befda7d92a6779be7b2a70ab161
+  SKSplashView: 8148a4893bf2d3dfe28750bc6fd71ae7cb0dda4a
 
-PODFILE CHECKSUM: 8ab41d3fd1a04452624b2c127d78b3c0fecb10df
+PODFILE CHECKSUM: eb55a02a8f243f5dc4999560d9ab4a7c9de55f90
 
 COCOAPODS: 1.1.1

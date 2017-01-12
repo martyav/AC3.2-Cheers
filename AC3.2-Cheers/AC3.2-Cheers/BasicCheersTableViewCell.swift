@@ -32,8 +32,6 @@ class BasicCheersTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
     
     @IBAction func favoriteIt(_ sender: UIButton) {
@@ -45,7 +43,6 @@ class BasicCheersTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        // Reset the cell for new row's data
         self.faveIt.isSelected = false
         self.venueName?.text = "LOADING..."
         self.popularTimes?.text = ""
