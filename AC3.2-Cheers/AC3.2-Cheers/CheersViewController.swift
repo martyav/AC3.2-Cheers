@@ -12,15 +12,11 @@ import CoreLocation
 import CoreData
 import SKSplashView
 
-
-class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, FaveButtonDelegate, UISearchBarDelegate {
-    
-    @IBOutlet weak var locationSearchBar: UISearchBar!
-
 class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, Tappable {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var locationSearchBar: UISearchBar!
     var splashIcon: SKSplashIcon!
     var splashView: SKSplashView!
     
