@@ -29,7 +29,7 @@
 <img width="230" alt="screen shot 2017-01-12 at 12 35 09 am" src="https://cloud.githubusercontent.com/assets/19174201/21878337/8e8a9248-d85f-11e6-9291-fadfdc495fd0.png">
 <img width="222" alt="screen shot 2017-01-12 at 12 36 07 am" src="https://cloud.githubusercontent.com/assets/19174201/21878341/9469c5c6-d85f-11e6-83e0-c01ebdd22b71.png">
 
-## Tweet or post your favorites to social media!
+## Tweet or post your favorites onto social media!
 <img width="230" alt="screen shot 2017-01-12 at 12 35 09 am"
 src="https://s23.postimg.org/g1cnrhii3/Screen_Shot_2017_01_12_at_12_05_59_AM.png">
 
