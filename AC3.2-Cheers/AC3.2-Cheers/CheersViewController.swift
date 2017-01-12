@@ -11,15 +11,11 @@ import MapKit
 import CoreLocation
 import CoreData
 
-
-class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, FaveButtonDelegate, UISearchBarDelegate {
-    
-    @IBOutlet weak var locationSearchBar: UISearchBar!
-
-class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, Tappable {
+class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, Tappable, UISearchBarDelegate {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var locationSearchBar: UISearchBar!
     
 
     let geocoder: CLGeocoder = CLGeocoder()
