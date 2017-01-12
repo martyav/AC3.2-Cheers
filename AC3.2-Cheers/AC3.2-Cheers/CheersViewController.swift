@@ -10,11 +10,14 @@ import UIKit
 import MapKit
 import CoreLocation
 import CoreData
+import SKSplashView
 
 class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, Tappable {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
+    var splashIcon: SKSplashIcon!
+    var splashView: SKSplashView!
     
     let geocoder: CLGeocoder = CLGeocoder()
     var fetchedResultsController: NSFetchedResultsController<HappyHourVenue>!
@@ -32,6 +35,15 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        splashIcon = SKSplashIcon(image: #imageLiteral(resourceName: "beerDarkGOLD"), animationType: SKIconAnimationType.ping)
+        
+        splashView = SKSplashView(splashIcon: splashIcon, backgroundColor: .white, animationType: SKSplashAnimationType.fade)
+        
+        view.addSubview(splashView)
+        
+        splashView.animationDuration = 5.0
+        splashView.startAnimation()
         
         activityIndicator.isHidden = true
         locationManager.delegate = self

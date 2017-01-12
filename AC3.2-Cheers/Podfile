@@ -6,4 +6,5 @@ target 'AC3.2-Cheers' do
   use_frameworks!
 
   pod 'FaveButton'
+  pod 'SKSplashView'
 end
