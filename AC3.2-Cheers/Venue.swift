@@ -18,6 +18,7 @@ class Venue {
     let message: String
     let status : String
     let id : String
+    
     init?(from dict: [String: Any]) {
         if let name = dict["name"] as? String,
             let id = dict["id"] as? String,
@@ -42,11 +43,11 @@ class Venue {
             self.message = message
             self.status = status
             self.id = id 
-        }
-        else {
+        } else {
             return nil
         }
     }
+    
     static func parseVenue(from array:[[String:Any]]) -> [Venue] {
         var venues = [Venue]()
         for item in array {
@@ -59,12 +60,10 @@ class Venue {
         return venues
     }
     
-    
     func convert(meters: Int16) -> String {
         let miles = Double(meters) * 0.0006
         return String(format: "%.1f", miles) + " miles away"
     }
-    
     
     func distanceFormatted() -> String {
         let distance = self.distance
@@ -75,7 +74,7 @@ class Venue {
         if isMetric {
             return String(distance)
         } else {
-            return convert(meters: Int16(distance))
+            return convert(meters: distance)
         }
     }
 }
