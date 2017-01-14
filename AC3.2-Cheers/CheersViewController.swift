@@ -218,7 +218,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     // MARK: SearchBar Delegate Methods 
-    
+    //
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         let geoCoder = CLGeocoder()
         // guard let validText = searchBar.text else {return}

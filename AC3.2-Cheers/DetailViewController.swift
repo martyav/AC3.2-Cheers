@@ -227,7 +227,7 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-    
+    //
     // MARK: - Button Action
     
     func backButtonTapped(_ sender: UIBarButtonItem) {
