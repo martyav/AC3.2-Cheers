@@ -207,30 +207,34 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     func favoriteButtonClicked(at index: IndexPath) {
-        let currentVenue = allVenues[index.row]
+        let favoritedVenue = NSEntityDescription.insertNewObject(forEntityName: "HappyHourVenues", into: mainContext) as! HappyHourVenues
+        let venue = allVenues[index.row]
+        favoritedVenue.name = venue.name
         
         if mainContext.hasChanges {
             try! mainContext.save()
         }
         
+        let currentVenue = allVenues[index.row]
         currentVenue.favorite = !currentVenue.favorite
-            if currentVenue.favorite {
-                let alertController = UIAlertController(title: "Cheers!", message: "You added \(currentVenue.name) to your favorites!", preferredStyle: UIAlertControllerStyle.alert)
-                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-                    print("OK")
-                }
-                alertController.addAction(okAction)
-                self.present(alertController, animated: true, completion: nil)
-                print("added to faves")
-            } else {
-                let alertController = UIAlertController(title: "Jeers!", message: "You removed \(currentVenue.name) from favorites!", preferredStyle: UIAlertControllerStyle.alert)
-                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-                    print("OK")
-                }
-                alertController.addAction(okAction)
-                self.present(alertController, animated: true, completion: nil)
-                print("removed from faves")
-            }   
+        
+        if currentVenue.favorite {
+            let alertController = UIAlertController(title: "Cheers!", message: "You added \(currentVenue.name) to your favorites!", preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+                print("OK")
+            }
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+            print("added to faves")
+        } else {
+            let alertController = UIAlertController(title: "Jeers!", message: "You removed \(currentVenue.name) from favorites!", preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+                print("OK")
+            }
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+            print("removed from faves")
+        }
     }
     
     // MARK: SearchBar Delegate Methods 
