@@ -13,7 +13,6 @@ import CoreData
 import SKSplashView
 
 class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, Tappable, UISearchBarDelegate {
-    
     @IBOutlet weak var locationSearchBar: UISearchBar!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
@@ -218,7 +217,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     // MARK: SearchBar Delegate Methods 
-    //
+    
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         let geoCoder = CLGeocoder()
         // guard let validText = searchBar.text else {return}
@@ -235,6 +234,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             }
         }
     }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
