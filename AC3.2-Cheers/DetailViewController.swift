@@ -86,7 +86,7 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                         let timeframes = popular["timeframes"] as? [[String:Any]] {
                         
                         for times in timeframes {
-                            guard includesToday = times["includesToday"] != nil  else { return }
+                            guard times["includesToday"] != nil  else { return }
                             
                             if let open = times["open"] as? [[String:Any]] {
                                 for populartimes in open {
