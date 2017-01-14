@@ -17,9 +17,14 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
+    
     var splashIcon: SKSplashIcon!
     var splashView: SKSplashView!
+    
     var allVenues:[Venue] = []
+    
+    var matchingItems: [MKMapItem] = []
+    var regionBounds: [String: Any] = [:]
     let geocoder: CLGeocoder = CLGeocoder()
     
     let locationManager: CLLocationManager = {
@@ -44,14 +49,18 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         splashView.startAnimation()
         
         activityIndicator.isHidden = true
+        
         locationManager.delegate = self
-        mapView.delegate = self
+        
         tableView.delegate = self
         tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.register(UINib(nibName: "BasicCheersTableViewCell", bundle: nil),forCellReuseIdentifier: "cheers")
+        
         locationSearchBar.delegate = self
         
+        mapView.delegate = self
+        mapView.showsUserLocation = true 
     }
     
     override func viewDidAppear (_ animated: Bool) {
@@ -85,13 +94,37 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 if let jsonData = try? JSONSerialization.jsonObject(with: validData, options: []) {
                     if let fullDict = jsonData as? [String: Any],
                         let response = fullDict["response"] as? [String:Any],
+                        let suggestedBounds = response["suggestedBounds"] as? [String:Any],
+                        let ne = suggestedBounds["ne"] as? [String:Double],
+                        let sw = suggestedBounds["sw"] as? [String:Double],
+                        let maxLat = ne["lat"],
+                        let maxLng = ne["lng"],
+                        let minLat = sw["lat"],
+                        let minLng = sw["lng"],
                         let groups = response["groups"] as? [[String:AnyObject]],
                         let items = groups[0]["items"] as? [[String: Any]] {
                         self.allVenues = Venue.parseVenue(from: items)
                         
+                        // zoom to show all markers, resource: http://stackoverflow.com/questions/3434020/ios-mkmapview-zoom-to-show-all-markers
+                        var region = MKCoordinateRegion()
+                        region.center.latitude = (minLat + maxLat) / 2
+                        region.center.longitude = (minLng + maxLng) / 2
+                        region.span.latitudeDelta = (maxLat - minLat)
+                        region.span.longitudeDelta = (maxLng - minLng)
+                        self.mapView.setRegion(self.mapView.regionThatFits(region), animated: true)
+                        
+                        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 1000, 1000)
+                        self.mapView.setRegion(coordinateRegion, animated: true)
                         DispatchQueue.main.async {
                             self.allVenues.sort(by: {$0.tier < $1.tier})
                             self.tableView.reloadData()
+                            
+                            let annotation: MKPointAnnotation = MKPointAnnotation()
+                            annotation.coordinate = location.coordinate
+                            annotation.title = "This is you!"
+                            self.mapView.addAnnotation(annotation)
+                            let cirlceOverLay: MKCircle = MKCircle(center: annotation.coordinate, radius: 100.0)
+                            self.mapView.add(cirlceOverLay)
                         }
                     }
                 }
@@ -114,25 +147,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-
-        guard let validLocation = locations.first else { return }
-               getData(location: validLocation)
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(validLocation.coordinate, 500, 500)
-        mapView.setRegion(coordinateRegion, animated: true)
-        let annotation: MKPointAnnotation = MKPointAnnotation()
-        annotation.coordinate = validLocation.coordinate
-        annotation.title = "This is you!"
-        mapView.addAnnotation(annotation)
-        let cirlceOverLay: MKCircle = MKCircle(center: annotation.coordinate, radius: 100.0)
-        mapView.add(cirlceOverLay)
-        geocoder.reverseGeocodeLocation(validLocation) { (placemark: [CLPlacemark]?, error: Error?) in
-            if error != nil {
-                dump(error!)
-                return
-            }
-            dump(placemark)
-            guard let _: CLPlacemark = placemark?.last else { return }
-        }
+        guard let _ = locations.first else { return }
     }
     
     // MARK: - Mapview Delegate
@@ -145,6 +160,11 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         return circleOverlayRenderer
     }
     
+    // update mapview based on user movements
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        mapView.centerCoordinate = userLocation.location!.coordinate
+    }
+
     // MARK: - TableView Delegate & Data Source
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -157,28 +177,26 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cheers", for: indexPath) as! BasicCheersTableViewCell
-        
         let venue = allVenues[indexPath.row]
         
+        if cell.delegate == nil {
+            cell.delegate = self
+        }
+        cell.venueName.text = venue.name
+        cell.distance.text = venue.distanceFormatted()
+        if cell.faveIt != nil {
+            cell.faveIt.isSelected = venue.favorite
+        }
         let currencySymbol: Character
         if let unwrapLocalCurrencySymbol = NSLocale.current.currencySymbol {
             currencySymbol = Character(unwrapLocalCurrencySymbol)
         } else {
             currencySymbol = "$"
         }
-        if cell.faveIt != nil {
-            cell.faveIt.isSelected = venue.favorite
-        }
-        if cell.delegate == nil {
-            cell.delegate = self 
-        }
-        cell.venueName.text = venue.name
-        cell.distance.text = venue.distanceFormatted()
         cell.pricing.text = String(repeatElement(currencySymbol, count: Int(venue.tier)))
         cell.popularTimes.text = venue.status
         
         return cell
-        
     }
     
     // Cell Fave Button
@@ -212,22 +230,24 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 alertController.addAction(okAction)
                 self.present(alertController, animated: true, completion: nil)
                 print("removed from faves")
-            }
-        
+            }   
     }
     
     // MARK: SearchBar Delegate Methods 
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         let geoCoder = CLGeocoder()
-        // guard let validText = searchBar.text else {return}
+        
         geoCoder.geocodeAddressString(searchBar.text!) { (placemarks:[CLPlacemark]?, error: Error?) in
             if(error != nil){
                 print(error ?? "Error!!")
             }
+                                                        
             if let placemark = placemarks?.first {
-                guard let location = placemark.location else {return}
+                guard let location = placemark.location else { return }
+                
                 self.getData(location: location)
+                
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
