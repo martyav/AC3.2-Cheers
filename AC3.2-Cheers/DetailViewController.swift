@@ -11,13 +11,15 @@ import Social
 import WebKit
 
 class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
+    
     var progressView: UIProgressView!
     var happyHour: Venue!
     var webView: WKWebView = WKWebView()
     let topToolBar: UIToolbar = UIToolbar()
     let bottomToolBar: UIToolbar = UIToolbar()
     let popularLabel: UILabel = UILabel()
-    let sampleURL = "https://www.foursquare.com"
+    
+    let sampleURL = "https://foursquare.com/v/lic-bar/43e4e9c1f964a520ee2e1fe3"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +34,7 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         
-        let myURL = URL(string: "https://www.foursquare.com")
+        let myURL = URL(string: "https://foursquare.com/v/lic-bar/43e4e9c1f964a520ee2e1fe3")
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
     }
@@ -41,10 +43,9 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         webView.removeObserver(self, forKeyPath: "estimatedProgress")
     }
     
-    // MARK: - Time Display Logic
+    // MARK: - Time Formating
     
     func stringMilTimeToAMPM(time: String) -> String {
-        
         var morning = "A.M."
         var hours = 0
         var minutes = 0
@@ -52,6 +53,7 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         
         if let milTime = Int(time) {
             minutes = milTime % 100
+        
             if milTime > 1200 {
                 hours = (milTime / 100) - 12
                 morning = "P.M."
@@ -70,7 +72,7 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     }
     
     // MARK: - API Call
-    
+
     func getBusinessData() {
         let date = Date()
         
@@ -84,7 +86,7 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                         let timeframes = popular["timeframes"] as? [[String:Any]] {
                         
                         for times in timeframes {
-                            guard (times["includesToday"] as? Bool) != nil else { return }
+                            guard includesToday = times["includesToday"] != nil  else { return }
                             
                             if let open = times["open"] as? [[String:Any]] {
                                 for populartimes in open {
@@ -94,7 +96,9 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                                         let start = start
                                         let end = end
                                         let startToEnd = "\(self.stringMilTimeToAMPM(time: start)) - \(self.stringMilTimeToAMPM(time: end))"
+                                        
                                         arrayOfTimes.append(startToEnd)
+                                        
                                         let strRepresentation = arrayOfTimes.joined(separator: " and")
                                         
                                         DispatchQueue.main.async {
@@ -115,7 +119,7 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     func setupTopToolbar() {
         topToolBar.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44)
         self.view.addSubview(topToolBar)
-        
+
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: DetailViewController.self, action: nil)
         let rewindButton = UIBarButtonItem(barButtonSystemItem: .rewind, target: self, action: #selector(backButtonTapped))
         let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshButtonTapped))
@@ -126,8 +130,8 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         forwardButton.tintColor = .orange
         
         topToolBar.items = [rewindButton, flexibleSpace, refreshButton, flexibleSpace, forwardButton]
-        topToolBar.translatesAutoresizingMaskIntoConstraints = false
         
+        topToolBar.translatesAutoresizingMaskIntoConstraints = false
         let _ = [
             topToolBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
             topToolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -139,15 +143,13 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     
     func setupBottomToolbar() {
         bottomToolBar.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44)
-        
         self.view.addSubview(bottomToolBar)
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: DetailViewController.self, action: nil)
         let button = UIBarButtonItem(title: "Share", style: UIBarButtonItemStyle.plain, target: self, action: #selector(shareOptionTapped))
-        
         bottomToolBar.items = [flexibleSpace, button, flexibleSpace]
-        bottomToolBar.translatesAutoresizingMaskIntoConstraints = false
         
+        bottomToolBar.translatesAutoresizingMaskIntoConstraints = false
         let _ = [
             bottomToolBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             bottomToolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -160,6 +162,7 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     // MARK: - Progress Bar
     
     func setupProgressBar() {
+        
         progressView = UIProgressView(progressViewStyle: UIProgressViewStyle.default)
         view.addSubview(progressView)
         
@@ -186,9 +189,11 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         popularLabel.numberOfLines = 0
         popularLabel.font = UIFont(name: "Futura-Medium", size: 20)
         popularLabel.textColor = .orange
+        
         view.addSubview(popularLabel)
         
         popularLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         let _ = [
             popularLabel.topAnchor.constraint(equalTo: progressView.bottomAnchor),
             popularLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -210,6 +215,7 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         view.addSubview(webView)
         
         webView.translatesAutoresizingMaskIntoConstraints = false
+        
         let _ = [
             webView.topAnchor.constraint(equalTo: popularLabel.bottomAnchor),
             webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -227,7 +233,7 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-    //
+    
     // MARK: - Button Action
     
     func backButtonTapped(_ sender: UIBarButtonItem) {
@@ -243,7 +249,6 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     }
     
     func shareOptionTapped(_ sender: UIBarButtonItem) {
-        
         let activityViewController = UIActivityViewController(activityItems: ["Check out this awesome bar! #cheers", sampleURL], applicationActivities: nil)
         activityViewController.excludedActivityTypes = [UIActivityType.mail]
         self.present(activityViewController, animated: true, completion: nil)
