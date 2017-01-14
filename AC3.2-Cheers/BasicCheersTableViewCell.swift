@@ -45,7 +45,6 @@ class BasicCheersTableViewCell: UITableViewCell {
         
         self.faveIt.isSelected = false
         self.venueName?.text = "LOADING..."
-        BasicCheersTableViewCell.swift
         self.popularTimes?.text = ""
         self.distance?.text = ""
         self.pricing?.text = ""
