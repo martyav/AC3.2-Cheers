@@ -6,11 +6,13 @@ class BarTableViewController: UITableViewController, NSFetchedResultsControllerD
     
     var context: NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
         return appDelegate.persistentContainer.viewContext
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationController?.navigationBar.tintColor = UIColor.orange
         initializeFetchedResultsController()
     }
@@ -62,21 +64,19 @@ class BarTableViewController: UITableViewController, NSFetchedResultsControllerD
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { return true }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let object = controller.object(at: indexPath)
+            
             context.delete(object)
+            
             try! context.save()
         }
     }
     
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) { tableView.beginUpdates() }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         switch type {
@@ -90,7 +90,7 @@ class BarTableViewController: UITableViewController, NSFetchedResultsControllerD
             break
         }
     }
-    //
+    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert:
