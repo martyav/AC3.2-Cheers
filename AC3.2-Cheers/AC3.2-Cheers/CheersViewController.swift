@@ -10,20 +10,19 @@ import UIKit
 import MapKit
 import CoreLocation
 import CoreData
+import SKSplashView
 
-
-class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, FaveButtonDelegate, UISearchBarDelegate {
+class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, Tappable, UISearchBarDelegate {
     
     @IBOutlet weak var locationSearchBar: UISearchBar!
-
-class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, Tappable {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
-    
-
+    var splashIcon: SKSplashIcon!
+    var splashView: SKSplashView!
+    var allVenues:[Venue] = []
     let geocoder: CLGeocoder = CLGeocoder()
-    var fetchedResultsController: NSFetchedResultsController<HappyHourVenue>!
+    
     let locationManager: CLLocationManager = {
         let location: CLLocationManager = CLLocationManager()
         location.desiredAccuracy = kCLLocationAccuracyHundredMeters
@@ -39,17 +38,19 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        splashIcon = SKSplashIcon(image: #imageLiteral(resourceName: "beerDarkGOLD"), animationType: SKIconAnimationType.ping)
+        splashView = SKSplashView(splashIcon: splashIcon, backgroundColor: .white, animationType: SKSplashAnimationType.fade)
+        view.addSubview(splashView)
+        splashView.animationDuration = 5.0
+        splashView.startAnimation()
+        
         activityIndicator.isHidden = true
         locationManager.delegate = self
         mapView.delegate = self
         tableView.delegate = self
         tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
-
         tableView.register(UINib(nibName: "BasicCheersTableViewCell", bundle: nil),forCellReuseIdentifier: "cheers")
-        
-
-        initializeFetchedResultsController()
         locationSearchBar.delegate = self
         
     }
@@ -74,7 +75,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         print("map failed to load")
     }
     
-    //MARK: - Networking
+    // MARK: - Networking
     
     func getData(location: CLLocation) {
         let userLong = String(location.coordinate.longitude)
@@ -87,35 +88,18 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                         let response = fullDict["response"] as? [String:Any],
                         let groups = response["groups"] as? [[String:AnyObject]],
                         let items = groups[0]["items"] as? [[String: Any]] {
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                        let pc = appDelegate.persistentContainer
-                        pc.performBackgroundTask { (context: NSManagedObjectContext) in
-                            context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-                            for venueObj in items {
-                                let happyHourVenues = HappyHourVenue(context: context)
-                                let result = happyHourVenues.populate(from: venueObj)
-                                
-                                if !result {
-                                    context.delete(happyHourVenues)
-                                }
-                            }
-                            do {
-                                try context.save()
-                            }
-                            catch let error {
-                                print(error)
-                            }
-                            DispatchQueue.main.async {
-                                self.initializeFetchedResultsController()
-                                self.tableView.reloadData()
-                            }
+                        self.allVenues = Venue.parseVenue(from: items)
+                        
+                        DispatchQueue.main.async {
+                            self.allVenues.sort(by: {$0.tier < $1.tier})
+                            self.tableView.reloadData()
                         }
                     }
                 }
             }
         }
     }
-    
+
     // MARK: - CoreLocation Delegate
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -131,8 +115,9 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        dump(locations)
+
         guard let validLocation = locations.first else { return }
+               getData(location: validLocation)
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(validLocation.coordinate, 500, 500)
         mapView.setRegion(coordinateRegion, animated: true)
         let annotation: MKPointAnnotation = MKPointAnnotation()
@@ -149,7 +134,6 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             dump(placemark)
             guard let _: CLPlacemark = placemark?.last else { return }
         }
-        getData(location: validLocation)
     }
     
     // MARK: - Mapview Delegate
@@ -165,61 +149,56 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     // MARK: - TableView Delegate & Data Source
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if let sections = fetchedResultsController.sections {
-            return sections.count
-        }
-        return 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let sections = fetchedResultsController.sections {
-            let info: NSFetchedResultsSectionInfo = sections[section]
-            return info.numberOfObjects
-        }
-        return 0
+        return allVenues.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cheers", for: indexPath) as! BasicCheersTableViewCell
-        let venueObj = fetchedResultsController.object(at: indexPath)
-        let currencySymbol: Character
         
+        let venue = allVenues[indexPath.row]
+        
+        let currencySymbol: Character
         if let unwrapLocalCurrencySymbol = NSLocale.current.currencySymbol {
             currencySymbol = Character(unwrapLocalCurrencySymbol)
         } else {
             currencySymbol = "$"
         }
         if cell.faveIt != nil {
-            cell.faveIt.isSelected = venueObj.favorite
+            cell.faveIt.isSelected = venue.favorite
         }
-        cell.venueName.text = venueObj.name
-        cell.distance.text = venueObj.distanceFormatted()
-        let price = String(repeatElement(currencySymbol, count: Int(venueObj.tier)))
-        cell.pricing.text = price
-        cell.popularTimes.text = venueObj.status
-        
         if cell.delegate == nil {
-            cell.delegate = self
+            cell.delegate = self 
         }
+        cell.venueName.text = venue.name
+        cell.distance.text = venue.distanceFormatted()
+        cell.pricing.text = String(repeatElement(currencySymbol, count: Int(venue.tier)))
+        cell.popularTimes.text = venue.status
         
         return cell
+        
     }
     
     // Cell Fave Button
     
+    // allows us to know which fave button was clicked in which cell
     func cellTapped(cell: UITableViewCell) {
         self.favoriteButtonClicked(at: tableView.indexPath(for: cell)!)
     }
     
     func favoriteButtonClicked(at index: IndexPath) {
-        print("You clicked the fave button!!!")
-        let currentVenue = fetchedResultsController.object(at: index)
-        currentVenue.favorite = !currentVenue.favorite
+        let currentVenue = allVenues[index.row]
         
-        if let name = currentVenue.name {
+        if mainContext.hasChanges {
+            try! mainContext.save()
+        }
+        
+        currentVenue.favorite = !currentVenue.favorite
             if currentVenue.favorite {
-                // add to array that populates second tableview
-                let alertController = UIAlertController(title: "Cheers!", message: "You added \(name) to your favorites!", preferredStyle: UIAlertControllerStyle.alert)
+                let alertController = UIAlertController(title: "Cheers!", message: "You added \(currentVenue.name) to your favorites!", preferredStyle: UIAlertControllerStyle.alert)
                 let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
                     print("OK")
                 }
@@ -227,8 +206,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 self.present(alertController, animated: true, completion: nil)
                 print("added to faves")
             } else {
-                // remove from array that populates second tableview
-                let alertController = UIAlertController(title: "Jeers!", message: "You removed \(name) from favorites!", preferredStyle: UIAlertControllerStyle.alert)
+                let alertController = UIAlertController(title: "Jeers!", message: "You removed \(currentVenue.name) from favorites!", preferredStyle: UIAlertControllerStyle.alert)
                 let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
                     print("OK")
                 }
@@ -236,42 +214,23 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 self.present(alertController, animated: true, completion: nil)
                 print("removed from faves")
             }
-        }
-        
     }
     
-    // MARK - FetchResultsController Functions
-    
-    func initializeFetchedResultsController() {
-        let request: NSFetchRequest<HappyHourVenue> = HappyHourVenue.fetchRequest()
-        let sort = NSSortDescriptor(key: "tier", ascending: true)
-        request.sortDescriptors = [sort]
-        
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
-        fetchedResultsController.delegate = self
-        
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            fatalError("Failed to initialize FetchedResultsController: \(error)")
-        }
-    }
-    // Mark: - Search Bar
+    // MARK: SearchBar Delegate Methods 
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         let geoCoder = CLGeocoder()
-       // guard let validText = searchBar.text else {return}
+        // guard let validText = searchBar.text else {return}
         geoCoder.geocodeAddressString(searchBar.text!) { (placemarks:[CLPlacemark]?, error: Error?) in
-            if((error) != nil){
-                print("Error", error)
+            if(error != nil){
+                print(error ?? "Error!!")
             }
             if let placemark = placemarks?.first {
                 guard let location = placemark.location else {return}
                 self.getData(location: location)
-                /*DispatchQueue.main.async {
-                    self.initializeFetchedResultsController()
+                DispatchQueue.main.async {
                     self.tableView.reloadData()
-                }*/
+                }
             }
         }
     }
@@ -279,14 +238,9 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         searchBar.resignFirstResponder()
     }
     
-
-    /*
      // MARK: - Navigation
      
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier:"showDetails", sender: tableView)
+    }
 }
