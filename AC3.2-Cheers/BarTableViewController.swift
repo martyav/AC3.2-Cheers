@@ -36,6 +36,12 @@ class BarTableViewController: UITableViewController, NSFetchedResultsControllerD
         do {
             try controller.performFetch()
         } catch {
+            let alertController = UIAlertController(title: "Oops!", message: "We can't find your saved favorites right now! Try again later.", preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+                print(error)
+            }
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
             fatalError("Failed to initialize FetchedResultsController: \(error)")
         }
     }
@@ -49,10 +55,13 @@ class BarTableViewController: UITableViewController, NSFetchedResultsControllerD
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let sections = controller.sections {
             let info = sections[section]
-            print(info.numberOfObjects)
             return info.numberOfObjects
         }
         return 0
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "FAVORITES"
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,4 +124,11 @@ class BarTableViewController: UITableViewController, NSFetchedResultsControllerD
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
+    
+    /*
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     self.performSegue(withIdentifier:"showDetails", sender: tableView)
+     }
+
+     */
 }
