@@ -183,6 +183,10 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         return allVenues.count
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "NEARBY BARS & DRINKING VENUES"
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cheers", for: indexPath) as! BasicCheersTableViewCell
         let venue = allVenues[indexPath.row]

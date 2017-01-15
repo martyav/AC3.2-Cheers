@@ -55,10 +55,13 @@ class BarTableViewController: UITableViewController, NSFetchedResultsControllerD
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let sections = controller.sections {
             let info = sections[section]
-            print(info.numberOfObjects)
             return info.numberOfObjects
         }
         return 0
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "FAVORITES"
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
