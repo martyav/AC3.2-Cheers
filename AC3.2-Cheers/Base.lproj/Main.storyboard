@@ -144,7 +144,7 @@
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Uzn-ht-f99">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uzn-ht-f99">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.99215686270000003" green="0.74901960779999999" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>

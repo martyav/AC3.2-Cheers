@@ -36,6 +36,12 @@ class BarTableViewController: UITableViewController, NSFetchedResultsControllerD
         do {
             try controller.performFetch()
         } catch {
+            let alertController = UIAlertController(title: "Oops!", message: "We can't find your saved favorites right now! Try again later.", preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+                print(error)
+            }
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
             fatalError("Failed to initialize FetchedResultsController: \(error)")
         }
     }
