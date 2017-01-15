@@ -115,4 +115,11 @@ class BarTableViewController: UITableViewController, NSFetchedResultsControllerD
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
+    
+    /*
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     self.performSegue(withIdentifier:"showDetails", sender: tableView)
+     }
+
+     */
 }

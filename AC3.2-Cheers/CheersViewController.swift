@@ -42,6 +42,8 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "VivaLaFiesta", size: 46)!, NSForegroundColorAttributeName: UIColor(red: 255/255, green: 188/255, blue: 83/255, alpha: 1.0)]
+        
         splashIcon = SKSplashIcon(image: #imageLiteral(resourceName: "beerDarkGOLD"), animationType: SKIconAnimationType.ping)
         splashView = SKSplashView(splashIcon: splashIcon, backgroundColor: .white, animationType: SKSplashAnimationType.fade)
         view.addSubview(splashView)
@@ -64,6 +66,10 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     override func viewDidAppear (_ animated: Bool) {
+        
+    }
+    
+    func mapViewWillStartRenderingMap(_ mapView: MKMapView) {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
     }
@@ -80,7 +86,6 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         }
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
-        print("map failed to load")
     }
     
     // MARK: - Networking
@@ -137,10 +142,13 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .authorizedWhenInUse, .authorizedAlways:
-            print("Authorized, start tracking!")
             manager.startUpdatingLocation()
         case .denied, .restricted:
-            print("Denied or restricted, change in settings!")
+                let alertController = UIAlertController(title: "Request denied!", message: "We can't currently access your location. We were denied or restricted from having that info. Sorry!", preferredStyle: UIAlertControllerStyle.alert)
+                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+                }
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
         default:
             self.locationManager.requestAlwaysAuthorization()
         }
@@ -182,6 +190,7 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         if cell.delegate == nil {
             cell.delegate = self
         }
+        
         cell.venueName.text = venue.name
         cell.distance.text = venue.distanceFormatted()
         if cell.faveIt != nil {
@@ -221,19 +230,15 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         if currentVenue.favorite {
             let alertController = UIAlertController(title: "Cheers!", message: "You added \(currentVenue.name) to your favorites!", preferredStyle: UIAlertControllerStyle.alert)
             let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-                print("OK")
             }
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
-            print("added to faves")
         } else {
             let alertController = UIAlertController(title: "Jeers!", message: "You removed \(currentVenue.name) from favorites!", preferredStyle: UIAlertControllerStyle.alert)
             let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-                print("OK")
             }
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
-            print("removed from faves")
         }
     }
     

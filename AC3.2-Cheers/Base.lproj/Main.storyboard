@@ -90,7 +90,7 @@
             </objects>
             <point key="canvasLocation" x="964" y="790.25487256371821"/>
         </scene>
-        <!--Bar Table View Controller-->
+        <!--CHEERS-->
         <scene sceneID="ZWs-K2-yne">
             <objects>
                 <tableViewController id="PXd-mt-O5O" customClass="BarTableViewController" customModule="AC3_2_Cheers" customModuleProvider="target" sceneMemberID="viewController">
@@ -113,6 +113,7 @@
                             <outlet property="delegate" destination="PXd-mt-O5O" id="mug-DA-7SR"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="CHEERS" id="cct-oG-GJ6"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vJl-fL-CS9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -143,7 +144,7 @@
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uzn-ht-f99">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Uzn-ht-f99">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.99215686270000003" green="0.74901960779999999" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
