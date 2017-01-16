@@ -34,7 +34,7 @@
 src="https://s23.postimg.org/g1cnrhii3/Screen_Shot_2017_01_12_at_12_05_59_AM.png">
 
 ## Share your awesome finds with friends !
-<img width="400" alt="screen shot 2017-01-12 at 12 35 09 am"
+<img width="450" alt="screen shot 2017-01-12 at 12 35 09 am"
 src="https://s23.postimg.org/sts9yhgnv/Screen_Shot_2017_01_16_at_3_13_25_PM.png">
 
 ## Cheers -- you deserve a drink!
