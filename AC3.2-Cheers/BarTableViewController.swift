@@ -22,6 +22,7 @@ class BarTableViewController: UITableViewController, NSFetchedResultsControllerD
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.tintColor = UIColor.orange
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
         initializeFetchedResultsController()
     }
     

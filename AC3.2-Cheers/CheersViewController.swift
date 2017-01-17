@@ -44,6 +44,8 @@ class CheersViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "VivaLaFiesta", size: 46)!, NSForegroundColorAttributeName: UIColor(red: 255/255, green: 188/255, blue: 83/255, alpha: 1.0)]
         
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
+        
         splashIcon = SKSplashIcon(image: #imageLiteral(resourceName: "beerDarkGOLD"), animationType: SKIconAnimationType.ping)
         splashView = SKSplashView(splashIcon: splashIcon, backgroundColor: .white, animationType: SKSplashAnimationType.fade)
         view.addSubview(splashView)

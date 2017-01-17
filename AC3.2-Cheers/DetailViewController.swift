@@ -31,6 +31,7 @@ class DetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         getBusinessData()
         
         self.navigationController?.navigationBar.tintColor = UIColor.orange
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
         
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         
